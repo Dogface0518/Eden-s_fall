@@ -1,3 +1,3 @@
 # Eden-s_fall
-java school project.\n
+java school project.
 T-T taasa sa process oy.
