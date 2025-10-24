@@ -1,8 +1,8 @@
-//---- ADAN.JAVA ----
+//---- GUIDE.JAVA ----
   
 package com.mycompany.game;
  
-class adan implements CharacterStats {
+class guide implements CharacterStats {
     private int hp     = 35;
     private int energy = 6;
 //attacks
@@ -11,11 +11,11 @@ class adan implements CharacterStats {
     private boolean defend; // dmg reduction skill
  
 //constructor
-    public adan(int hp, int energy, int punch, int tackle) {
+    public guide(int hp, int energy, int punch, int tackle) {
         this.hp       = hp;
         this.energy   = energy;
-        this.punch    = punch;
-        this.tackle   = tackle;
+        this.punch    = punch;//
+        this.tackle   = tackle;//
     }
 
     @Override
@@ -33,7 +33,7 @@ class adan implements CharacterStats {
     if (defend) {
         amount /= 2; // reduce dmg by half
         defend = false;
-        System.out.println("Adan blocked half of the damage.");
+        System.out.println("Guide blocked half of the damage.");
     }
     hp -= amount; 
     if (hp < 0) {
@@ -47,7 +47,7 @@ class adan implements CharacterStats {
         int energyCost = 1;
         if (energy >= energyCost){
             useEnergy(energyCost);
-            System.out.println("Adan uses Punch Combo, doing 5 damage!");
+            System.out.println("Guide uses Bless, doing 5 damage!");
             target.takeDamage(punch);
         } else {
             System.out.println("Not enough energy to use this. Turn Skipped.");
@@ -57,7 +57,7 @@ class adan implements CharacterStats {
         int energyCost = 3;
         if (energy >= energyCost){
             useEnergy(energyCost);
-            System.out.println("Adan uses Tackle, doing 8 damage!");
+            System.out.println("Guide uses Smite, doing 8 damage!");
             target.takeDamage(tackle);
         } else {
             System.out.println("Not enough energy to use this. Turn Skipped.");
@@ -68,7 +68,7 @@ class adan implements CharacterStats {
         if (energy >= energyCost) {
             useEnergy(energyCost);
             defend = true;
-            System.out.println("Adan is preparing to defend himself.");
+            System.out.println("Guide casts a thin holy barrier on himself.");
         } else {
             System.out.println("Not enough energy to use this. Turn Skipped.");
         } 
