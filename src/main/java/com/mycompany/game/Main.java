@@ -58,13 +58,32 @@ public class Main {
             System.out.println();
             System.out.println(playerName + ", choose your character:");
             System.out.println("1. Eb   - The Reckless Striker");
-            System.out.println("2. Adan - Iron Resolve");
+            System.out.println("2. Adan - The Iron Resolve");
+            System.out.println("3. Tanas - The Devil");
+            System.out.println("4. Guide - The Guardian");
+            System.out.println("5. Apple - The Temptor");
             String choice = scanner.nextLine();
             System.out.println();
             if (choice.equals("1")) {
-                return new eb(25, 6, 7, 11);
+                System.out.println("-----Lore bits-----");
+                System.out.println("A WOMAN! She came to wash dishes and Kick ass. And she's all out of dishes.");// OP
+                return new eb(25, 6, 7, 11);//HP, ENERGY, BASIC ATTACK, SKILL
             } else if (choice.equals("2")) {
-                return new adan(35, 6, 5, 8);
+                System.out.println("-----Lore bits-----");
+                System.out.println("MAN. Born from the discarded flesh of a newly birthed world.");// Ilisdi nig tarong oy.
+                return new adan(35, 6, 5, 8);//HP, ENERGY, BASIC ATTACK, SKILL
+            } else if (choice.equals("3")) {
+                System.out.println("-----Lore bits-----");
+                System.out.println("666, A fallen celestial, A deciever, A misguided son");// Chuya, unsay lore ani
+                return new tanas(35, 6, 5, 9);//HP, ENERGY, BASIC ATTACK, SKILL
+            } else if (choice.equals("4")) {
+                System.out.println("-----Lore bits-----");
+                System.out.println("An Observer, It works in mysterious ways, Its motives unknown.");// Kinsa ni? Holy Spirit?
+                return new guide(25, 6, 4, 7);//HP, ENERGY, BASIC ATTACK, SKILL
+            } else if (choice.equals("5")) {
+                System.out.println("-----Lore bits-----");
+                System.out.println("Your head starts aching as visions and knowledge incomprohensible floods into your mind. \"%%$ #@$!@ ^@$^#$ !$$@@ !$@!) ");//
+                return new apple(30, 6, 2, 10);//HP, ENERGY, BASIC ATTACK, SKILL
             }
         }
     }
@@ -81,6 +100,21 @@ public class Main {
             System.out.println("2. Tackle      - (3) energy");
             System.out.println("3. Defend      - (2) energy");
             System.out.println("4. Skip        - (+1) energy");
+        } else if (player instanceof tanas) {
+            System.out.println("1. Whip        - (1) energy");
+            System.out.println("2. Bite        - (3) energy");
+            System.out.println("3. Evade       - (2) energy");
+            System.out.println("4. Skip        - (+1) energy");
+        }  else if (player instanceof guide) {
+            System.out.println("1. Bless       - (1) energy");
+            System.out.println("2. Smite       - (3) energy");
+            System.out.println("3. Defend      - (2) energy");
+            System.out.println("4. Skip        - (+1) energy");
+        }  else if (player instanceof apple) {
+            System.out.println("1. Knowledge     - (1) energy");// TEMP, change to player friendly skill
+            System.out.println("2. Hollow Purple - (3) energy");// TEMP, change to player friendly skill
+            System.out.println("3. Defend        - (2) energy");// TEMP, change to player friendly skill
+            System.out.println("4. Skip          - (+1) energy");
         }
 
         String action = scanner.nextLine();
@@ -107,6 +141,42 @@ public class Main {
                 case "4" -> {
                     System.out.println(playerName + " chooses to skip the turn and gains 1 energy.");
                     adanPlayer.useEnergy(-1);
+                }
+                default -> System.out.println("Invalid action. Turn skipped.");
+            }
+            System.out.println("-O-------------O-");
+        } else if (player instanceof tanas tanasPlayer) {
+            switch (action) {
+                case "1" -> tanasPlayer.lowkick(opponent);// temp change to whip
+                case "2" -> tanasPlayer.dropkick(opponent);// temp change to bite
+                case "3" -> tanasPlayer.evade();
+                case "4" -> {
+                    System.out.println(playerName + " chooses to skip the turn and gains 1 energy.");
+                    tanasPlayer.useEnergy(-1);
+                }
+                default -> System.out.println("Invalid action. Turn skipped.");
+            }
+            System.out.println("-O-------------O-");
+        } else if (player instanceof guide guidePlayer) {
+            switch (action) {
+                case "1" -> guidePlayer.punch(opponent);// 
+                case "2" -> guidePlayer.tackle(opponent);// 
+                case "3" -> guidePlayer.defend();
+                case "4" -> {
+                    System.out.println(playerName + " chooses to skip the turn and gains 1 energy.");
+                    guidePlayer.useEnergy(-1);
+                }
+                default -> System.out.println("Invalid action. Turn skipped.");
+            }
+            System.out.println("-O-------------O-");
+        } else if (player instanceof apple applePlayer) {
+            switch (action) {
+                case "1" -> applePlayer.lowkick(opponent);// 
+                case "2" -> applePlayer.dropkick(opponent);// 
+                case "3" -> applePlayer.evade();
+                case "4" -> {
+                    System.out.println(playerName + " chooses to skip the turn and gains 1 energy.");
+                    applePlayer.useEnergy(-1);
                 }
                 default -> System.out.println("Invalid action. Turn skipped.");
             }
