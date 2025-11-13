@@ -1,4 +1,4 @@
-//----STATUS.JAVA----
+//----CHARACTERSTATS.JAVA----
  
 package com.mycompany.game;
  

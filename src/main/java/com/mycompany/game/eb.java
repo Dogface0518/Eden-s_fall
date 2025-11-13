@@ -3,11 +3,11 @@
 package com.mycompany.game;
  
 class eb implements CharacterStats {
-    private int hp       = 25;
-    private int energy   = 6;
+    private int hp       = 30;
+    private int energy   = 7;
 //attacks
     private int lowkick  = 7;
-    private int dropkick = 11;
+    private int dropkick = 15;
     private boolean evade;
  
 //constructor
@@ -22,19 +22,20 @@ class eb implements CharacterStats {
     public int getHP()     { return hp; }
     @Override
     public int getEnergy() { return energy; }
- 
+    
+    private boolean[] evadeFlag = new boolean[]{false};
 
     @Override
     public void takeDamage(int amount) {
-        //after gigamit ang dodge:
-        if(evade){
-        evade = false;
-        System.out.println("Eb dodged! 0 damage.");
-        return;
+        //after gigamit ang dodge:/ gibalhin na nakos lain class ang dodge og defend
+        if(evadeFlag[0]){
+            evadeFlag[0] = false;
+            System.out.println("Eb dodged the attack with skillful acrobatics! 0 damage.");
+            return;
         }
         hp -= amount; 
         if (hp < 0) {
-        hp = 0; 
+            hp = 0; 
         }
     }
 
@@ -56,7 +57,7 @@ class eb implements CharacterStats {
         }
     }
     public void dropkick(CharacterStats target){
-        int energyCost = 3;
+        int energyCost = 2;
         if (energy >= energyCost){
             useEnergy(energyCost);
             System.out.println("Eb uses Drop Kick, doing 9 damage!");
@@ -66,14 +67,6 @@ class eb implements CharacterStats {
         }
     }
     public void evade(){
-        int energyCost = 2;
-        if (energy >= energyCost) {
-            useEnergy(energyCost);
-            evade = true;
-            System.out.println("Eb is prepared and ready to dodge any attack.");
-        } else {
-            System.out.println("Not enough energy to use this.");
-        } 
+        skill.evade(this, evadeFlag, 2);
     }
- 
 }

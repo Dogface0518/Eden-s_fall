@@ -3,11 +3,11 @@
 package com.mycompany.game;
  
 class adan implements CharacterStats {
-    private int hp     = 35;
-    private int energy = 6;
+    private int hp     = 40;
+    private int energy = 5;
 //attacks
     private int punch  = 5;
-    private int tackle = 8; // stun
+    private int tackle = 8; // add stun
     private boolean defend; // dmg reduction skill
  
 //constructor
@@ -28,19 +28,21 @@ class adan implements CharacterStats {
         energy -= amount;
         if (energy < 0) energy = 0;
     }
+    
+    private boolean[] defendFlag = new boolean[]{false};
+    
     @Override
     public void takeDamage(int amount) {
-    if (defend) {
+    if (defendFlag[0]) {
         amount /= 2; // reduce dmg by half
-        defend = false;
-        System.out.println("Adan blocked half of the damage.");
+        defendFlag[0] = false;
+        System.out.println("Adan blocked half of the damage with sheer willpower and strength.");
     }
     hp -= amount; 
     if (hp < 0) {
         hp = 0; 
     }
 }
- 
     
 //ATTACK METHODS
     public void punch(CharacterStats target){
@@ -64,15 +66,6 @@ class adan implements CharacterStats {
         }
     }
     public void defend(){
-        int energyCost = 2;
-        if (energy >= energyCost) {
-            useEnergy(energyCost);
-            defend = true;
-            System.out.println("Adan is preparing to defend himself.");
-        } else {
-            System.out.println("Not enough energy to use this. Turn Skipped.");
-        } 
+        skill.defend(this, defendFlag, 2);
     }
- 
- 
 }
