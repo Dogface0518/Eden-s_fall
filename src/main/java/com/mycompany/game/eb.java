@@ -1,6 +1,7 @@
-//----- EB.JAVA -----
-  
+//----EB.JAVA----
 package com.mycompany.game;
+
+import java.util.Random;
  
 class eb implements CharacterStats {
     private int hp       = 30;
@@ -9,7 +10,6 @@ class eb implements CharacterStats {
     private int lowkick  = 7;
     private int dropkick = 15;
     private boolean evade;
- 
 //constructor
     public eb(int hp, int energy, int lowkick, int dropkick) {
         this.hp       = hp;
@@ -22,9 +22,8 @@ class eb implements CharacterStats {
     public int getHP()     { return hp; }
     @Override
     public int getEnergy() { return energy; }
-    
     private boolean[] evadeFlag = new boolean[]{false};
-
+ 
     @Override
     public void takeDamage(int amount) {
         //after gigamit ang dodge:/ gibalhin na nakos lain class ang dodge og defend
@@ -38,30 +37,40 @@ class eb implements CharacterStats {
             hp = 0; 
         }
     }
-
+ 
     @Override
     public void useEnergy(int amount) {
         energy -= amount;
         if (energy < 0) energy = 0;
     }
-
+    public void gainEnergy(int amount) {
+    energy += amount;
+    if (energy > 5) {
+        energy = 5;
+       }
+    }
+ 
 //ATTACK METHODS
     public void lowkick(CharacterStats target){
         int energyCost = 1;
+        Random random = new Random();  
+        int LkickDMG = random.nextInt(3) + 7;
         if (energy >= energyCost){
             useEnergy(energyCost);
-            System.out.println("Eb uses Low Kick, doing 7 damage!");
-            target.takeDamage(lowkick);
+            System.out.println("Eb uses Low Kick, doing "+LkickDMG+" damage!");
+            target.takeDamage(LkickDMG);
         } else {
             System.out.println("Not enough energy to use this.");
         }
     }
     public void dropkick(CharacterStats target){
         int energyCost = 2;
+        Random random = new Random();  
+        int dropKDMG = random.nextInt(5) + 15;
         if (energy >= energyCost){
             useEnergy(energyCost);
-            System.out.println("Eb uses Drop Kick, doing 9 damage!");
-            target.takeDamage(dropkick);
+            System.out.println("Eb uses Drop Kick, doing "+dropKDMG+" damage!");
+            target.takeDamage(dropKDMG);
         } else {
             System.out.println("Not enough energy to use this.");
         }

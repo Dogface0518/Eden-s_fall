@@ -1,5 +1,4 @@
-//-- SKILL.java --
- 
+//----SKILL.JAVA----
 package com.mycompany.game;
 
 public class skill {
@@ -12,7 +11,6 @@ public class skill {
             System.out.println("Not enough energy to use Evade. Turn Skipped.");
         } 
     }
-    
     public static void defend(CharacterStats user, boolean[] defendFlag, int energyCost){
         if (user.getEnergy() >= energyCost) {
             user.useEnergy(energyCost);
@@ -22,9 +20,7 @@ public class skill {
             System.out.println("Not enough energy to Defend. Turn Skipped.");
         }
     }
-    
     private static String getCharacterName(CharacterStats user){// Kailangan para ang ngan sa character ni use sa skill mogawas.
         return user.getClass().getSimpleName();
     }
-    
 }

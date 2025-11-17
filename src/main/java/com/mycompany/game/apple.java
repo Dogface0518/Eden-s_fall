@@ -1,7 +1,8 @@
-//-- APPLE.java --
- 
+//----APPLE.JAVA----
 package com.mycompany.game;
-
+ 
+import java.util.Random;
+ 
 class apple implements CharacterStats {
     private int hp     = 28;
     private int energy = 6;
@@ -16,14 +17,13 @@ class apple implements CharacterStats {
         this.bump   = bump;
         this.squash = squash;
     }
- //setter
+//setter
     @Override
     public int getHP()      { return hp; }
     @Override
     public int getEnergy()  { return energy; }
- 
     private boolean[] evadeFlag = new boolean[]{false};
-
+ 
     @Override
     public void takeDamage(int amount) {
         if(evadeFlag[0]){
@@ -36,30 +36,39 @@ class apple implements CharacterStats {
             hp = 0; 
         }
     }
- 
     @Override
     public void useEnergy(int amount) {
         energy -= amount;
         if (energy < 0) energy = 0;
     }
-
+    public void gainEnergy(int amount) {
+    energy += amount;
+    if (energy > 5) {
+        energy = 5;
+       }
+    }
+ 
 //ATTACK METHODS
     public void bump(CharacterStats target){
         int energyCost = 1;
+        Random random = new Random();  
+        int bumpDMG = random.nextInt(3) + 7;
         if (energy >= energyCost){
             useEnergy(energyCost);
-            System.out.println("Apple uses Bump, doing 7 damage!");
-            target.takeDamage(bump);
+            System.out.println("Apple uses Bump, doing "+bumpDMG+" damage!");
+            target.takeDamage(bumpDMG);
         } else {
             System.out.println("Not enough energy to use this.");
         }
     }
     public void squash(CharacterStats target){
         int energyCost = 3;
+        Random random = new Random();  
+        int squashDMG = random.nextInt(4) + 11;
         if (energy >= energyCost){
             useEnergy(energyCost);
-            System.out.println("Apple uses Squash, doing 9 damage!");
-            target.takeDamage(squash);
+            System.out.println("Apple uses Squash, doing "+squashDMG+" damage!");
+            target.takeDamage(squashDMG);
         } else {
             System.out.println("Not enough energy to use this.");
         }

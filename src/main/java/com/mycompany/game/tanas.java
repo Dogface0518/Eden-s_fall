@@ -1,39 +1,46 @@
-//-- TANAS.java --
- 
+//----TANAS.JAVA----
 package com.mycompany.game;
 
-class tanas implements CharacterStats {// Basta 6
+import java.util.Random;
+ 
+class tanas implements CharacterStats {  // Basta 6
+ 
     private int hp     = 26;
     private int energy = 6;
-    //attacks
-    private int whip  = 6;
-    private int bite = 14;
-    private boolean evade;//ka OP aning evade oy, 1 energy pagyud
-//constructor
-    public tanas(int hp, int energy, int whip, int bite) {
-        this.hp     = hp;
-        this.energy = energy;
-        this.whip  = whip;
-        this.bite  = bite;
-    }
- //setter
-    @Override
-    public int getHP()      { return hp; }
-    @Override
-    public int getEnergy()  { return energy; }
- 
+    private int whip   = 6;
+    private int bite   = 14;
     private boolean[] evadeFlag = new boolean[]{false};
-
+ 
+    // Constructor (if you want to allow dynamic initialization)
+    public tanas(int hp, int energy, int whip, int bite) {
+        this.hp = hp;
+        this.energy = energy;
+        this.whip = whip;
+        this.bite = bite;
+    }
+ 
+    // Getter methods
+    @Override
+    public int getHP() {
+        return hp;
+    }
+ 
+    @Override
+    public int getEnergy() {
+        return energy;
+    }
+ 
+    // Damage taking logic
     @Override
     public void takeDamage(int amount) {
-        if(evadeFlag[0]){
+        if (evadeFlag[0]) {
             evadeFlag[0] = false;
             System.out.println("Tanas dodged the attack with graceful flight! 0 damage.");
             return;
         }
-        hp -= amount; 
+        hp -= amount;
         if (hp < 0) {
-            hp = 0; 
+            hp = 0;
         }
     }
  
@@ -42,24 +49,38 @@ class tanas implements CharacterStats {// Basta 6
         energy -= amount;
         if (energy < 0) energy = 0;
     }
-
-//ATTACK METHODS
-    public void whip(CharacterStats target){
+ 
+    // Method to gain energy
+    public void gainEnergy(int amount) {
+        energy += amount;
+        if (energy > 5) {
+            energy = 5;
+        }
+    }
+ 
+    // ATTACK METHODS
+    public void whip(CharacterStats target) {
         int energyCost = 1;
-        if (energy >= energyCost){
+        Random random = new Random();  
+        int whipDMG = random.nextInt(3) + 6;
+        if (energy >= energyCost) {
             useEnergy(energyCost);
-            System.out.println("Tanas uses Whip, doing 6 damage!");
-            target.takeDamage(whip);
+            System.out.println("Tanas uses Whip, doing "+whipDMG+" damage!");
+            target.takeDamage(whipDMG);
         } else {
             System.out.println("Not enough energy to use this.");
         }
     }
-    public void bite(CharacterStats target){
-        int energyCost = 2;
-        if (energy >= energyCost){
-            useEnergy(energyCost);
-            System.out.println("Tanas uses Bite, doing 14 damage!");
-            target.takeDamage(bite);
+ 
+    public void bite(CharacterStats target) {
+        int energyCost = 3; 
+        Random random = new Random();  
+        int biteDMG = random.nextInt(5) + 14;
+ 
+        if (energy >= energyCost) {
+            useEnergy(energyCost);  
+            System.out.println("Tanas uses Bite, doing "+biteDMG+" damage!");
+            target.takeDamage(biteDMG);  
         } else {
             System.out.println("Not enough energy to use this.");
         }

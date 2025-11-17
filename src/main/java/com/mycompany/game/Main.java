@@ -1,25 +1,27 @@
-//---MAIN.JAVA---
- 
+//----MAIN.JAVA----
 package com.mycompany.game;
 
 import java.util.Scanner;
-
+import java.util.Random;
+ 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String player1Name = "Player 1";
-        String player2Name = "Player 2";
-
+        System.out.print("Set player 1 name: ");
+        String player1Name = scanner.nextLine();
+        System.out.print("Set player 2 name: ");
+        String player2Name = scanner.nextLine();
+ 
         // Character Selection
         CharacterStats player1 = chooseCharacter(scanner, player1Name);
         CharacterStats player2 = chooseCharacter(scanner, player2Name);
         boolean player1Turn = true;
-
+ 
         System.out.println();
         System.out.println("-O==========================================O-");
         System.out.println("     PVP Turn-Based with Touch Move Rule.\n   -Once you press enter you can't go back-");
         System.out.println("-O==========================================O-");
-
+ 
         // Game Loop
         while (player1.getHP() > 0 && player2.getHP() > 0) {
             if (player1Turn) {
@@ -29,17 +31,17 @@ public class Main {
                 System.out.println("\n" + player2Name + "'s turn");
                 playerTurn(scanner, player2, player1, player2Name);
             }
-
+ 
             // Status Display
             System.out.println("\n-----Status-----");
             System.out.println(player1Name + " - HP: " + player1.getHP() + ", Energy: " + player1.getEnergy());
             System.out.println(player2Name + " - HP: " + player2.getHP() + ", Energy: " + player2.getEnergy());
             System.out.println("----------------");
-
+ 
             // Switch Turns
             player1Turn = !player1Turn;
         }
-
+ 
         // Determine Winner
         System.out.println("\n--- Game Over ---");
         if (player1.getHP() <= 0 && player2.getHP() <= 0) {
@@ -49,10 +51,10 @@ public class Main {
         } else {
             System.out.println(player1Name + " wins!");
         }
-
+ 
         scanner.close();
     }
-
+ 
     public static CharacterStats chooseCharacter(Scanner scanner, String playerName) {
         while (true) {
             System.out.println();
@@ -87,40 +89,41 @@ public class Main {
             }
         }
     }
-
+ 
     public static void playerTurn(Scanner scanner, CharacterStats player, CharacterStats opponent, String playerName) {
+        Random random = new Random(); //for dice roll||damage range
         System.out.println(playerName + ", choose an action:");
         if (player instanceof eb) {
-            System.out.println("1. Low Kick  - (1) energy");
-            System.out.println("2. Drop Kick - (3) energy");
-            System.out.println("3. Evade     - (2) energy");
-            System.out.println("4. Skip      - (+1) energy");
+            int LKickDMG = random.nextInt(3) + 7;  System.out.println("1. Low Kick  - (1)  energy | (7) damage");
+            int dropKDMG = random.nextInt(5) + 15;  System.out.println("2. Drop Kick - (3)  energy | (15) damage");
+            System.out.println("3. Evade     - (2)  energy");
+            System.out.println("4. Skip      - (+1) energy ");
         } else if (player instanceof adan) {
-            System.out.println("1. Punch Combo - (1) energy");
-            System.out.println("2. Tackle      - (3) energy");
-            System.out.println("3. Defend      - (2) energy");
+            int punchDMG  = random.nextInt(3) + 5;  System.out.println("1. Punch Combo - (1)  energy | (5) damage");
+            int tackleDMG = random.nextInt(4) + 8;  System.out.println("2. Tackle      - (3)  energy | (8) damage");
+            System.out.println("3. Defend      - (2)  energy");
             System.out.println("4. Skip        - (+1) energy");
         } else if (player instanceof tanas) {
-            System.out.println("1. Whip        - (1) energy");
-            System.out.println("2. Bite        - (3) energy");
-            System.out.println("3. Evade       - (2) energy");
+            int whipeDMG   = random.nextInt(3) + 6;  System.out.println("1. Whip        - (1)  energy | (6) damage");
+            int biteDamage = random.nextInt(5) + 14;  System.out.println("2. Bite        - (3)  energy | (14) damage");
+            System.out.println("3. Evade       - (2)  energy");
             System.out.println("4. Skip        - (+1) energy");
         }  else if (player instanceof guide) {
-            System.out.println("1. Bless       - (1) energy");
-            System.out.println("2. Smite       - (3) energy");
-            System.out.println("3. Defend      - (2) energy");
+            int blessDMG = random.nextInt(4) + 9;  System.out.println("1. Bless       - (1)  energy | (9) damage");
+            int smiteDMG = random.nextInt(3) + 5;  System.out.println("2. Smite       - (3)  energy | (5) damage");
+            System.out.println("3. Defend      - (2)  energy");
             System.out.println("4. Skip        - (+1) energy");
         }  else if (player instanceof apple) {
-            System.out.println("1. Bump         - (1) energy");//
-            System.out.println("2. Squash       - (3) energy");//
-            System.out.println("3. Defend       - (2) energy");//
+            int bumpDMG   = random.nextInt(3) + 7;  System.out.println("1. Bump         - (1)  energy | (7) damage");//
+            int squashDMG = random.nextInt(4) + 11;  System.out.println("2. Squash       - (3)  energy | (11) damage");//
+            System.out.println("3. Defend       - (2)  energy");//
             System.out.println("4. Skip         - (+1) energy");
         }
-
+ 
         String action = scanner.nextLine();
         System.out.println();
         System.out.println("-O-------------O-");
-
+ 
         if (player instanceof eb ebPlayer) {
             switch (action) {
                 case "1" -> ebPlayer.lowkick(opponent);
@@ -128,7 +131,7 @@ public class Main {
                 case "3" -> ebPlayer.evade();
                 case "4" -> {
                     System.out.println(playerName + " chooses to skip the turn and gains 1 energy.");
-                    ebPlayer.useEnergy(-1);
+                    ebPlayer.gainEnergy(1);
                 }
                 default -> System.out.println("Invalid action. Turn skipped.");
             }
@@ -140,7 +143,7 @@ public class Main {
                 case "3" -> adanPlayer.defend();
                 case "4" -> {
                     System.out.println(playerName + " chooses to skip the turn and gains 1 energy.");
-                    adanPlayer.useEnergy(-1);
+                    adanPlayer.gainEnergy(1);
                 }
                 default -> System.out.println("Invalid action. Turn skipped.");
             }
@@ -152,7 +155,7 @@ public class Main {
                 case "3" -> tanasPlayer.evade();
                 case "4" -> {
                     System.out.println(playerName + " chooses to skip the turn and gains 1 energy.");
-                    tanasPlayer.useEnergy(-1);
+                    tanasPlayer.gainEnergy(1);
                 }
                 default -> System.out.println("Invalid action. Turn skipped.");
             }
@@ -164,7 +167,7 @@ public class Main {
                 case "3" -> guidePlayer.defend();
                 case "4" -> {
                     System.out.println(playerName + " chooses to skip the turn and gains 1 energy.");
-                    guidePlayer.useEnergy(-1);
+                    guidePlayer.gainEnergy(1);
                 }
                 default -> System.out.println("Invalid action. Turn skipped.");
             }
@@ -176,7 +179,7 @@ public class Main {
                 case "3" -> applePlayer.evade();
                 case "4" -> {
                     System.out.println(playerName + " chooses to skip the turn and gains 1 energy.");
-                    applePlayer.useEnergy(-1);
+                    applePlayer.gainEnergy(1);
                 }
                 default -> System.out.println("Invalid action. Turn skipped.");
             }

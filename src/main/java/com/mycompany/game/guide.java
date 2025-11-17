@@ -1,15 +1,15 @@
-//---- GUIDE.JAVA ----
-  
+//----GUIDE.JAVA----
 package com.mycompany.game;
  
+import java.util.Random;
+
 class guide implements CharacterStats {
     private int hp     = 30;
     private int energy = 5;
 //attacks
-    private int bless  = 9;// add og heal oy
-    private int smite = 5; // add og stun oy
+    private int bless  = 9;// add og heal?
+    private int smite = 5; // add og stun?
     private boolean defend; // dmg reduction skill
- 
 //constructor
     public guide(int hp, int energy, int punch, int tackle) {
         this.hp       = hp;
@@ -17,20 +17,23 @@ class guide implements CharacterStats {
         this.bless    = bless;
         this.smite   = smite;
     }
-
+ 
     @Override
     public int getHP()     { return hp; }
     @Override
     public int getEnergy() { return energy; }
- 
     @Override
     public void useEnergy(int amount) {
         energy -= amount;
         if (energy < 0) energy = 0;
     }
-    
+    public void gainEnergy(int amount) {
+    energy += amount;
+    if (energy > 5) {
+        energy = 5;
+       }
+    }
     private boolean[] defendFlag = new boolean[]{false};
-    
     @Override
     public void takeDamage(int amount) {
     if (defendFlag[0]) {
@@ -43,24 +46,27 @@ class guide implements CharacterStats {
         hp = 0; 
     }
 }
-    
 //ATTACK METHODS
     public void bless(CharacterStats target){
         int energyCost = 1;
+        Random random = new Random();  
+        int blessDMG = random.nextInt(4) + 9;
         if (energy >= energyCost){
             useEnergy(energyCost);
-            System.out.println("Guide uses Bless, doing 9 damage!");
-            target.takeDamage(bless);
+            System.out.println("Guide uses Bless, doing "+blessDMG+" damage!");
+            target.takeDamage(blessDMG);
         } else {
             System.out.println("Not enough energy to use this. Turn Skipped.");
         }
     }
     public void smite(CharacterStats target){
         int energyCost = 3;
+        Random random = new Random();  
+        int smiteDMG = random.nextInt(3) + 5;
         if (energy >= energyCost){
             useEnergy(energyCost);
-            System.out.println("Guide uses Smite, doing 5 damage!");
-            target.takeDamage(smite);
+            System.out.println("Guide uses Smite, doing "+smiteDMG+" damage!");
+            target.takeDamage(smiteDMG);
         } else {
             System.out.println("Not enough energy to use this. Turn Skipped.");
         }
