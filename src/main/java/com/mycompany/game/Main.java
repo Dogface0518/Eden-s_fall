@@ -69,50 +69,50 @@ public class Main {
             if (choice.equals("1")) {
                 System.out.println("-----Lore bits-----");
                 System.out.println("Woman, She came to wash dishes and Kick ass. And she's all out of dishes.");// OP
-                return new eb(60, 4, 7, 15);//HP, ENERGY, BASIC ATTACK, SKILL
+                return new Eb(60, 4, 7, 15);//HP, ENERGY, BASIC ATTACK, SKILL
             } else if (choice.equals("2")) {
                 System.out.println("-----Lore bits-----");
                 System.out.println("Man. Born from the discarded flesh of a newly birthed world.");// 
-                return new adan(80, 4, 5, 8);//HP, ENERGY, BASIC ATTACK, SKILL
+                return new Adan(80, 4, 5, 8);//HP, ENERGY, BASIC ATTACK, SKILL
             } else if (choice.equals("3")) {
                 System.out.println("-----Lore bits-----");
                 System.out.println("Devil ,666, A fallen celestial, A deciever, A misguided son");// 
-                return new tanas(66, 4, 6, 14);//HP, ENERGY, BASIC ATTACK, SKILL
+                return new Tanas(66, 4, 6, 14);//HP, ENERGY, BASIC ATTACK, SKILL
             } else if (choice.equals("4")) {
                 System.out.println("-----Lore bits-----");
                 System.out.println("Angel, An Observer, It works in mysterious ways, Its motives unknown.");//
-                return new guide(60, 4, 9, 5);//HP, ENERGY, BASIC ATTACK, SKILL
+                return new Guide(60, 4, 9, 5);//HP, ENERGY, BASIC ATTACK, SKILL
             } else if (choice.equals("5")) {
                 System.out.println("-----Lore bits-----");
                 System.out.println("Temptation, Your head starts aching as visions and knowledge incomprohensible floods into your mind. \"%%$ #@$!@ ^@$^#$ !$$@@ !$@!) ");//
-                return new apple(50, 4, 7, 11);//HP, ENERGY, BASIC ATTACK, SKILL
+                return new Apple(50, 4, 7, 11);//HP, ENERGY, BASIC ATTACK, SKILL
             }
         }
     }
     public static void playerTurn(Scanner scanner, CharacterStats player, CharacterStats opponent, String playerName) {
         Random random = new Random(); //for dice roll||damage range
         System.out.println(playerName + ", choose an action:");
-        if (player instanceof eb) {
+        if (player instanceof Eb) {
             int LKickDMG = random.nextInt(3) + 7;  System.out.println("1. Low Kick  - (1)  energy | (7) damage");
             int dropKDMG = random.nextInt(5) + 15;  System.out.println("2. Drop Kick - (3)  energy | (15) damage");
             System.out.println("3. Evade     - (2)  energy");
             System.out.println("4. Skip      - (+1) energy ");
-        } else if (player instanceof adan) {
+        } else if (player instanceof Adan) {
             int punchDMG  = random.nextInt(3) + 5;  System.out.println("1. Punch Combo - (1)  energy | (5) damage");
             int tackleDMG = random.nextInt(4) + 8;  System.out.println("2. Tackle      - (3)  energy | (8) damage");
             System.out.println("3. Defend      - (2)  energy");
             System.out.println("4. Skip        - (+1) energy");
-        } else if (player instanceof tanas) {
+        } else if (player instanceof Tanas) {
             int whipeDMG   = random.nextInt(3) + 6;  System.out.println("1. Whip        - (1)  energy | (6) damage");
             int biteDamage = random.nextInt(5) + 14;  System.out.println("2. Bite        - (3)  energy | (14) damage");
             System.out.println("3. Evade       - (1)  energy");
             System.out.println("4. Skip        - (+1) energy");
-        }  else if (player instanceof guide) {
+        }  else if (player instanceof Guide) {
             int blessDMG = random.nextInt(4) + 9;  System.out.println("1. Bless       - (1)  energy | (9) damage");
             int smiteDMG = random.nextInt(3) + 5;  System.out.println("2. Smite       - (3)  energy | (5) damage");
             System.out.println("3. Defend      - (1)  energy");
             System.out.println("4. Skip        - (+1) energy");
-        }  else if (player instanceof apple) {
+        }  else if (player instanceof Apple) {
             int bumpDMG   = random.nextInt(3) + 7;  System.out.println("1. Bump         - (1)  energy | (7) damage");//
             int squashDMG = random.nextInt(4) + 11;  System.out.println("2. Squash       - (3)  energy | (11) damage");//
             System.out.println("3. Defend       - (2)  energy");//
@@ -123,7 +123,7 @@ public class Main {
         System.out.println();
         System.out.println("-O-------------O-");
  
-        if (player instanceof eb ebPlayer) {
+        if (player instanceof Eb ebPlayer) {
             switch (action) {
                 case "1" -> ebPlayer.lowkick(opponent);
                 case "2" -> ebPlayer.dropkick(opponent);
@@ -135,7 +135,7 @@ public class Main {
                 default -> System.out.println("Invalid action. Turn skipped.");
             }
             System.out.println("-O-------------O-");
-        } else if (player instanceof adan adanPlayer) {
+        } else if (player instanceof Adan adanPlayer) {
             switch (action) {
                 case "1" -> adanPlayer.punch(opponent);
                 case "2" -> adanPlayer.tackle(opponent);
@@ -147,7 +147,7 @@ public class Main {
                 default -> System.out.println("Invalid action. Turn skipped.");
             }
             System.out.println("-O-------------O-");
-        } else if (player instanceof tanas tanasPlayer) {
+        } else if (player instanceof Tanas tanasPlayer) {
             switch (action) {
                 case "1" -> tanasPlayer.whip(opponent);//
                 case "2" -> tanasPlayer.bite(opponent);//
@@ -159,7 +159,7 @@ public class Main {
                 default -> System.out.println("Invalid action. Turn skipped.");
             }
             System.out.println("-O-------------O-");
-        } else if (player instanceof guide guidePlayer) {
+        } else if (player instanceof Guide guidePlayer) {
             switch (action) {
                 case "1" -> guidePlayer.bless(opponent);// 
                 case "2" -> guidePlayer.smite(opponent);// 
@@ -171,7 +171,7 @@ public class Main {
                 default -> System.out.println("Invalid action. Turn skipped.");
             }
             System.out.println("-O-------------O-");
-        } else if (player instanceof apple applePlayer) {
+        } else if (player instanceof Apple applePlayer) {
             switch (action) {
                 case "1" -> applePlayer.bump(opponent);// 
                 case "2" -> applePlayer.squash(opponent);// 

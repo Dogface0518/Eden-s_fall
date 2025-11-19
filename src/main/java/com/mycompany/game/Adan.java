@@ -1,21 +1,22 @@
-//----GUIDE.JAVA----
+//----ADAN.JAVA----
 package com.mycompany.game;
- 
-import java.util.Random;
 
-class guide implements CharacterStats {
+import java.util.Random;
+ 
+class Adan implements CharacterStats {
+    Random random = new Random();  
     private int hp;
     private int energy;
 //attacks
-    private int bless;// add og heal?
-    private int smite; // add og stun?
+    private int punch;
+    private int tackle; // add stun?
     private boolean defend; // dmg reduction skill
 //constructor
-    public guide(int hp, int energy, int punch, int tackle) {
+    public Adan(int hp, int energy, int punch, int tackle) {
         this.hp       = hp;
         this.energy   = energy;
-        this.bless    = bless;
-        this.smite   = smite;
+        this.punch    = punch;
+        this.tackle   = tackle;
     }
  
     @Override
@@ -39,7 +40,7 @@ class guide implements CharacterStats {
     if (defendFlag[0]) {
         amount /= 2; // reduce dmg by half
         defendFlag[0] = false;
-        System.out.println("Guide's divine barrier blocked half the damage.");
+        System.out.println("Adan blocked half of the damage with sheer willpower and strength.");
     }
     hp -= amount; 
     if (hp < 0) {
@@ -47,31 +48,29 @@ class guide implements CharacterStats {
     }
 }
 //ATTACK METHODS
-    public void bless(CharacterStats target){
+    public void punch(CharacterStats target){
         int energyCost = 1;
-        Random random = new Random();  
-        int blessDMG = random.nextInt(4) + 9;
+        int punchDMG = random.nextInt(3) + 5;
         if (energy >= energyCost){
             useEnergy(energyCost);
-            System.out.println("Guide uses Bless, doing "+blessDMG+" damage!");
-            target.takeDamage(blessDMG);
+            System.out.println("Adan uses Punch Combo, doing "+punchDMG+" damage!");
+            target.takeDamage(punchDMG);
         } else {
             System.out.println("Not enough energy to use this. Turn Skipped.");
         }
     }
-    public void smite(CharacterStats target){
+    public void tackle(CharacterStats target){
         int energyCost = 2;
-        Random random = new Random();  
-        int smiteDMG = random.nextInt(3) + 5;
+        int tackleDMG = random.nextInt(4) + 8;
         if (energy >= energyCost){
             useEnergy(energyCost);
-            System.out.println("Guide uses Smite, doing "+smiteDMG+" damage!");
-            target.takeDamage(smiteDMG);
+            System.out.println("Adan uses Tackle, doing "+tackleDMG+" damage!");
+            target.takeDamage(tackleDMG);
         } else {
             System.out.println("Not enough energy to use this. Turn Skipped.");
         }
     }
     public void defend(){
-        Skill.defend(this, defendFlag, 1);
+        Skill.defend(this, defendFlag, 2);
     }
 }

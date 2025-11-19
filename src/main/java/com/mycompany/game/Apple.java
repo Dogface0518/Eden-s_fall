@@ -1,35 +1,34 @@
-//----EB.JAVA----
+//----APPLE.JAVA----
 package com.mycompany.game;
-
+ 
 import java.util.Random;
  
-class eb implements CharacterStats {
+class Apple implements CharacterStats {
     private int hp;
     private int energy;
-//attacks
-    private int lowkick;
-    private int dropkick;
+    //attacks
+    private int bump;
+    private int squash;//add stun?
     private boolean evade;
 //constructor
-    public eb(int hp, int energy, int lowkick, int dropkick) {
-        this.hp       = hp;
-        this.energy   = energy;
-        this.lowkick  = lowkick;
-        this.dropkick = dropkick;
+    public Apple(int hp, int energy, int bump, int squash) {
+        this.hp     = hp;
+        this.energy = energy;
+        this.bump   = bump;
+        this.squash = squash;
     }
 //setter
     @Override
-    public int getHP()     { return hp; }
+    public int getHP()      { return hp; }
     @Override
-    public int getEnergy() { return energy; }
+    public int getEnergy()  { return energy; }
     private boolean[] evadeFlag = new boolean[]{false};
  
     @Override
     public void takeDamage(int amount) {
-        //after gigamit ang dodge:/ gibalhin na nakos lain class ang dodge og defend
         if(evadeFlag[0]){
             evadeFlag[0] = false;
-            System.out.println("Eb dodged the attack with skillful acrobatics! 0 damage.");
+            System.out.println("Apple rolled around the attack with surprising speed! 0 damage.");
             return;
         }
         hp -= amount; 
@@ -37,7 +36,6 @@ class eb implements CharacterStats {
             hp = 0; 
         }
     }
- 
     @Override
     public void useEnergy(int amount) {
         energy -= amount;
@@ -51,26 +49,26 @@ class eb implements CharacterStats {
     }
  
 //ATTACK METHODS
-    public void lowkick(CharacterStats target){
+    public void bump(CharacterStats target){
         int energyCost = 1;
         Random random = new Random();  
-        int LkickDMG = random.nextInt(3) + 7;
+        int bumpDMG = random.nextInt(3) + 7;
         if (energy >= energyCost){
             useEnergy(energyCost);
-            System.out.println("Eb uses Low Kick, doing "+LkickDMG+" damage!");
-            target.takeDamage(LkickDMG);
+            System.out.println("Apple uses Bump, doing "+bumpDMG+" damage!");
+            target.takeDamage(bumpDMG);
         } else {
             System.out.println("Not enough energy to use this.");
         }
     }
-    public void dropkick(CharacterStats target){
+    public void squash(CharacterStats target){
         int energyCost = 2;
         Random random = new Random();  
-        int dropKDMG = random.nextInt(5) + 15;
+        int squashDMG = random.nextInt(4) + 11;
         if (energy >= energyCost){
             useEnergy(energyCost);
-            System.out.println("Eb uses Drop Kick, doing "+dropKDMG+" damage!");
-            target.takeDamage(dropKDMG);
+            System.out.println("Apple uses Squash, doing "+squashDMG+" damage!");
+            target.takeDamage(squashDMG);
         } else {
             System.out.println("Not enough energy to use this.");
         }

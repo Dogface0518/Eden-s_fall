@@ -3,7 +3,7 @@ package com.mycompany.game;
 
 import java.util.Random;
  
-class tanas implements CharacterStats {  // Basta 6
+class Tanas implements CharacterStats {  // Basta 6
  
     private int hp;
     private int energy;
@@ -12,7 +12,7 @@ class tanas implements CharacterStats {  // Basta 6
     private boolean[] evadeFlag = new boolean[]{false};
  
     // Constructor (if you want to allow dynamic initialization)
-    public tanas(int hp, int energy, int whip, int bite) {
+    public Tanas(int hp, int energy, int whip, int bite) {
         this.hp = hp;
         this.energy = energy;
         this.whip = whip;
