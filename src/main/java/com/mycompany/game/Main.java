@@ -69,27 +69,26 @@ public class Main {
             if (choice.equals("1")) {
                 System.out.println("-----Lore bits-----");
                 System.out.println("Woman, She came to wash dishes and Kick ass. And she's all out of dishes.");// OP
-                return new eb(30, 7, 7, 15);//HP, ENERGY, BASIC ATTACK, SKILL
+                return new eb(60, 4, 7, 15);//HP, ENERGY, BASIC ATTACK, SKILL
             } else if (choice.equals("2")) {
                 System.out.println("-----Lore bits-----");
-                System.out.println("Man. Born from the discarded flesh of a newly birthed world.");// Ilisdi nig tarong oy.
-                return new adan(40, 5, 5, 8);//HP, ENERGY, BASIC ATTACK, SKILL
+                System.out.println("Man. Born from the discarded flesh of a newly birthed world.");// 
+                return new adan(80, 4, 5, 8);//HP, ENERGY, BASIC ATTACK, SKILL
             } else if (choice.equals("3")) {
                 System.out.println("-----Lore bits-----");
-                System.out.println("Devil ,666, A fallen celestial, A deciever, A misguided son");// Chuya, unsay lore ani
-                return new tanas(26, 6, 6, 14);//HP, ENERGY, BASIC ATTACK, SKILL
+                System.out.println("Devil ,666, A fallen celestial, A deciever, A misguided son");// 
+                return new tanas(66, 4, 6, 14);//HP, ENERGY, BASIC ATTACK, SKILL
             } else if (choice.equals("4")) {
                 System.out.println("-----Lore bits-----");
-                System.out.println("Angel, An Observer, It works in mysterious ways, Its motives unknown.");// Kinsa ni? Holy Spirit?
-                return new guide(30, 5, 9, 5);//HP, ENERGY, BASIC ATTACK, SKILL
+                System.out.println("Angel, An Observer, It works in mysterious ways, Its motives unknown.");//
+                return new guide(60, 4, 9, 5);//HP, ENERGY, BASIC ATTACK, SKILL
             } else if (choice.equals("5")) {
                 System.out.println("-----Lore bits-----");
                 System.out.println("Temptation, Your head starts aching as visions and knowledge incomprohensible floods into your mind. \"%%$ #@$!@ ^@$^#$ !$$@@ !$@!) ");//
-                return new apple(28, 6, 7, 11);//HP, ENERGY, BASIC ATTACK, SKILL
+                return new apple(50, 4, 7, 11);//HP, ENERGY, BASIC ATTACK, SKILL
             }
         }
     }
- 
     public static void playerTurn(Scanner scanner, CharacterStats player, CharacterStats opponent, String playerName) {
         Random random = new Random(); //for dice roll||damage range
         System.out.println(playerName + ", choose an action:");
@@ -106,12 +105,12 @@ public class Main {
         } else if (player instanceof tanas) {
             int whipeDMG   = random.nextInt(3) + 6;  System.out.println("1. Whip        - (1)  energy | (6) damage");
             int biteDamage = random.nextInt(5) + 14;  System.out.println("2. Bite        - (3)  energy | (14) damage");
-            System.out.println("3. Evade       - (2)  energy");
+            System.out.println("3. Evade       - (1)  energy");
             System.out.println("4. Skip        - (+1) energy");
         }  else if (player instanceof guide) {
             int blessDMG = random.nextInt(4) + 9;  System.out.println("1. Bless       - (1)  energy | (9) damage");
             int smiteDMG = random.nextInt(3) + 5;  System.out.println("2. Smite       - (3)  energy | (5) damage");
-            System.out.println("3. Defend      - (2)  energy");
+            System.out.println("3. Defend      - (1)  energy");
             System.out.println("4. Skip        - (+1) energy");
         }  else if (player instanceof apple) {
             int bumpDMG   = random.nextInt(3) + 7;  System.out.println("1. Bump         - (1)  energy | (7) damage");//

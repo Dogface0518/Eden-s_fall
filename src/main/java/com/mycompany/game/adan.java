@@ -5,11 +5,11 @@ import java.util.Random;
  
 class adan implements CharacterStats {
     Random random = new Random();  
-    private int hp     = 40;
-    private int energy = 5;
+    private int hp;
+    private int energy;
 //attacks
-    private int punch  = 5;
-    private int tackle = 8; // add stun?
+    private int punch;
+    private int tackle; // add stun?
     private boolean defend; // dmg reduction skill
 //constructor
     public adan(int hp, int energy, int punch, int tackle) {
@@ -60,7 +60,7 @@ class adan implements CharacterStats {
         }
     }
     public void tackle(CharacterStats target){
-        int energyCost = 3;
+        int energyCost = 2;
         int tackleDMG = random.nextInt(4) + 8;
         if (energy >= energyCost){
             useEnergy(energyCost);
@@ -71,6 +71,6 @@ class adan implements CharacterStats {
         }
     }
     public void defend(){
-        skill.defend(this, defendFlag, 2);
+        Skill.defend(this, defendFlag, 2);
     }
 }

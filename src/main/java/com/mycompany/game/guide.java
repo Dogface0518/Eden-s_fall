@@ -4,11 +4,11 @@ package com.mycompany.game;
 import java.util.Random;
 
 class guide implements CharacterStats {
-    private int hp     = 30;
-    private int energy = 5;
+    private int hp;
+    private int energy;
 //attacks
-    private int bless  = 9;// add og heal?
-    private int smite = 5; // add og stun?
+    private int bless;// add og heal?
+    private int smite; // add og stun?
     private boolean defend; // dmg reduction skill
 //constructor
     public guide(int hp, int energy, int punch, int tackle) {
@@ -60,7 +60,7 @@ class guide implements CharacterStats {
         }
     }
     public void smite(CharacterStats target){
-        int energyCost = 3;
+        int energyCost = 2;
         Random random = new Random();  
         int smiteDMG = random.nextInt(3) + 5;
         if (energy >= energyCost){
@@ -72,6 +72,6 @@ class guide implements CharacterStats {
         }
     }
     public void defend(){
-        skill.defend(this, defendFlag, 1);
+        Skill.defend(this, defendFlag, 1);
     }
 }

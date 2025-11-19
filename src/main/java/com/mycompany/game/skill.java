@@ -1,7 +1,7 @@
 //----SKILL.JAVA----
 package com.mycompany.game;
 
-public class skill {
+public class Skill {
     public static void evade(CharacterStats user, boolean[] evadeFlag, int energyCost){
         if (user.getEnergy() >= energyCost) {
             user.useEnergy(energyCost);

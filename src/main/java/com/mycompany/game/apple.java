@@ -4,11 +4,11 @@ package com.mycompany.game;
 import java.util.Random;
  
 class apple implements CharacterStats {
-    private int hp     = 28;
-    private int energy = 6;
+    private int hp;
+    private int energy;
     //attacks
-    private int bump  = 7;
-    private int squash = 11;//add stun?
+    private int bump;
+    private int squash;//add stun?
     private boolean evade;
 //constructor
     public apple(int hp, int energy, int bump, int squash) {
@@ -62,7 +62,7 @@ class apple implements CharacterStats {
         }
     }
     public void squash(CharacterStats target){
-        int energyCost = 3;
+        int energyCost = 2;
         Random random = new Random();  
         int squashDMG = random.nextInt(4) + 11;
         if (energy >= energyCost){
@@ -74,6 +74,6 @@ class apple implements CharacterStats {
         }
     }
     public void evade(){
-        skill.evade(this, evadeFlag, 2);
+        Skill.evade(this, evadeFlag, 2);
     }
 }

@@ -5,10 +5,10 @@ import java.util.Random;
  
 class tanas implements CharacterStats {  // Basta 6
  
-    private int hp     = 26;
-    private int energy = 6;
-    private int whip   = 6;
-    private int bite   = 14;
+    private int hp;
+    private int energy;
+    private int whip;
+    private int bite;
     private boolean[] evadeFlag = new boolean[]{false};
  
     // Constructor (if you want to allow dynamic initialization)
@@ -73,7 +73,7 @@ class tanas implements CharacterStats {  // Basta 6
     }
  
     public void bite(CharacterStats target) {
-        int energyCost = 3; 
+        int energyCost = 2; 
         Random random = new Random();  
         int biteDMG = random.nextInt(5) + 14;
  
@@ -86,6 +86,6 @@ class tanas implements CharacterStats {  // Basta 6
         }
     }
     public void evade(){
-        skill.evade(this, evadeFlag, 1);
+        Skill.evade(this, evadeFlag, 1);
     }
 }

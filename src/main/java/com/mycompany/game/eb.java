@@ -4,11 +4,11 @@ package com.mycompany.game;
 import java.util.Random;
  
 class eb implements CharacterStats {
-    private int hp       = 30;
-    private int energy   = 7;
+    private int hp;
+    private int energy;
 //attacks
-    private int lowkick  = 7;
-    private int dropkick = 15;
+    private int lowkick;
+    private int dropkick;
     private boolean evade;
 //constructor
     public eb(int hp, int energy, int lowkick, int dropkick) {
@@ -76,6 +76,6 @@ class eb implements CharacterStats {
         }
     }
     public void evade(){
-        skill.evade(this, evadeFlag, 2);
+        Skill.evade(this, evadeFlag, 2);
     }
 }
