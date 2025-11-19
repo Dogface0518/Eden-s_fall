@@ -4,13 +4,12 @@ package com.mycompany.game;
 import java.util.Random;
  
 class Adan implements CharacterStats {
-    Random random = new Random();  
     private int hp;
     private int energy;
-//attacks
+//actions
     private int punch;
     private int tackle; // add stun?
-    private boolean defend; // dmg reduction skill
+    private boolean defendFlag = false; // dmg reduction skill
 //constructor
     public Adan(int hp, int energy, int punch, int tackle) {
         this.hp       = hp;
@@ -18,7 +17,7 @@ class Adan implements CharacterStats {
         this.punch    = punch;
         this.tackle   = tackle;
     }
- 
+ //setter
     @Override
     public int getHP()     { return hp; }
     @Override
@@ -28,29 +27,37 @@ class Adan implements CharacterStats {
         energy -= amount;
         if (energy < 0) energy = 0;
     }
+    @Override
     public void gainEnergy(int amount) {
     energy += amount;
-    if (energy > 5) {
-        energy = 5;
-       }
+    if (energy > 5) { energy = 5; }
     }
-    private boolean[] defendFlag = new boolean[]{false};
+    
     @Override
     public void takeDamage(int amount) {
-    if (defendFlag[0]) {
-        amount /= 2; // reduce dmg by half
-        defendFlag[0] = false;
-        System.out.println("Adan blocked half of the damage with sheer willpower and strength.");
+        if (defendFlag) {
+            amount /= 2; // reduce dmg by half
+            defendFlag = false;
+            System.out.println("Adan blocked half of the damage with sheer willpower and strength.");
+        }
+        hp -= amount; 
+        if (hp < 0) { hp = 0; }
     }
-    hp -= amount; 
-    if (hp < 0) {
-        hp = 0; 
-    }
-}
+    
+    @Override
+    public void setDefendFlag(boolean value){ defendFlag = value; }
+    @Override
+    public boolean getDefendFlag(){ return defendFlag; }
+    @Override
+    public void setEvadeFlag(boolean value){}
+    @Override
+    public boolean getEvadeFlag(){ return false; }
+    
 //ATTACK METHODS
     public void punch(CharacterStats target){
         int energyCost = 1;
-        int punchDMG = random.nextInt(3) + 5;
+        Random random = new Random(); 
+        int punchDMG = random.nextInt(3) + punch;
         if (energy >= energyCost){
             useEnergy(energyCost);
             System.out.println("Adan uses Punch Combo, doing "+punchDMG+" damage!");
@@ -61,7 +68,8 @@ class Adan implements CharacterStats {
     }
     public void tackle(CharacterStats target){
         int energyCost = 2;
-        int tackleDMG = random.nextInt(4) + 8;
+        Random random = new Random(); 
+        int tackleDMG = random.nextInt(4) + tackle;
         if (energy >= energyCost){
             useEnergy(energyCost);
             System.out.println("Adan uses Tackle, doing "+tackleDMG+" damage!");
@@ -71,6 +79,6 @@ class Adan implements CharacterStats {
         }
     }
     public void defend(){
-        Skill.defend(this, defendFlag, 2);
+        Skill.defend(this, 2);
     }
 }

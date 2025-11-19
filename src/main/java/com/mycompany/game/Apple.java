@@ -6,10 +6,10 @@ import java.util.Random;
 class Apple implements CharacterStats {
     private int hp;
     private int energy;
-    //attacks
+//actions
     private int bump;
     private int squash;//add stun?
-    private boolean evade;
+    private boolean evadeFlag = false;
 //constructor
     public Apple(int hp, int energy, int bump, int squash) {
         this.hp     = hp;
@@ -22,37 +22,44 @@ class Apple implements CharacterStats {
     public int getHP()      { return hp; }
     @Override
     public int getEnergy()  { return energy; }
-    private boolean[] evadeFlag = new boolean[]{false};
  
     @Override
     public void takeDamage(int amount) {
-        if(evadeFlag[0]){
-            evadeFlag[0] = false;
+        if(evadeFlag){
+            evadeFlag = false;
             System.out.println("Apple rolled around the attack with surprising speed! 0 damage.");
             return;
         }
         hp -= amount; 
-        if (hp < 0) {
-            hp = 0; 
-        }
+        if (hp < 0) { hp = 0; }
     }
     @Override
     public void useEnergy(int amount) {
         energy -= amount;
         if (energy < 0) energy = 0;
     }
+    @Override
     public void gainEnergy(int amount) {
     energy += amount;
     if (energy > 5) {
         energy = 5;
        }
     }
- 
+    
+    @Override
+    public void setEvadeFlag(boolean value){ evadeFlag = value; }
+    @Override
+    public boolean getEvadeFlag(){ return evadeFlag; }
+    @Override
+    public void setDefendFlag(boolean value){}
+    @Override
+    public boolean getDefendFlag(){ return false; }
+    
 //ATTACK METHODS
     public void bump(CharacterStats target){
         int energyCost = 1;
         Random random = new Random();  
-        int bumpDMG = random.nextInt(3) + 7;
+        int bumpDMG = random.nextInt(3) + bump;
         if (energy >= energyCost){
             useEnergy(energyCost);
             System.out.println("Apple uses Bump, doing "+bumpDMG+" damage!");
@@ -64,7 +71,7 @@ class Apple implements CharacterStats {
     public void squash(CharacterStats target){
         int energyCost = 2;
         Random random = new Random();  
-        int squashDMG = random.nextInt(4) + 11;
+        int squashDMG = random.nextInt(4) + squash;
         if (energy >= energyCost){
             useEnergy(energyCost);
             System.out.println("Apple uses Squash, doing "+squashDMG+" damage!");
@@ -74,6 +81,6 @@ class Apple implements CharacterStats {
         }
     }
     public void evade(){
-        Skill.evade(this, evadeFlag, 2);
+        Skill.evade(this, 2);
     }
 }

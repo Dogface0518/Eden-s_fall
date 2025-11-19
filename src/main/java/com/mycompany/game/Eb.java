@@ -6,10 +6,10 @@ import java.util.Random;
 class Eb implements CharacterStats {
     private int hp;
     private int energy;
-//attacks
+//actions
     private int lowkick;
     private int dropkick;
-    private boolean evade;
+    private boolean evadeFlag = false;
 //constructor
     public Eb(int hp, int energy, int lowkick, int dropkick) {
         this.hp       = hp;
@@ -22,20 +22,16 @@ class Eb implements CharacterStats {
     public int getHP()     { return hp; }
     @Override
     public int getEnergy() { return energy; }
-    private boolean[] evadeFlag = new boolean[]{false};
- 
     @Override
     public void takeDamage(int amount) {
         //after gigamit ang dodge:/ gibalhin na nakos lain class ang dodge og defend
-        if(evadeFlag[0]){
-            evadeFlag[0] = false;
+        if(evadeFlag){
+            evadeFlag = false;
             System.out.println("Eb dodged the attack with skillful acrobatics! 0 damage.");
             return;
         }
         hp -= amount; 
-        if (hp < 0) {
-            hp = 0; 
-        }
+        if (hp < 0) { hp = 0; }
     }
  
     @Override
@@ -43,18 +39,28 @@ class Eb implements CharacterStats {
         energy -= amount;
         if (energy < 0) energy = 0;
     }
+    @Override
     public void gainEnergy(int amount) {
     energy += amount;
     if (energy > 5) {
         energy = 5;
        }
     }
- 
+    
+    @Override
+    public void setEvadeFlag(boolean value){ evadeFlag = value; }
+    @Override
+    public boolean getEvadeFlag(){ return evadeFlag; }
+    @Override
+    public void setDefendFlag(boolean value){}
+    @Override
+    public boolean getDefendFlag(){ return false; }
+    
 //ATTACK METHODS
     public void lowkick(CharacterStats target){
         int energyCost = 1;
         Random random = new Random();  
-        int LkickDMG = random.nextInt(3) + 7;
+        int LkickDMG = random.nextInt(3) + lowkick;
         if (energy >= energyCost){
             useEnergy(energyCost);
             System.out.println("Eb uses Low Kick, doing "+LkickDMG+" damage!");
@@ -66,7 +72,7 @@ class Eb implements CharacterStats {
     public void dropkick(CharacterStats target){
         int energyCost = 2;
         Random random = new Random();  
-        int dropKDMG = random.nextInt(5) + 15;
+        int dropKDMG = random.nextInt(5) + dropkick;
         if (energy >= energyCost){
             useEnergy(energyCost);
             System.out.println("Eb uses Drop Kick, doing "+dropKDMG+" damage!");
@@ -76,6 +82,6 @@ class Eb implements CharacterStats {
         }
     }
     public void evade(){
-        Skill.evade(this, evadeFlag, 2);
+        Skill.evade(this, 2);
     }
 }

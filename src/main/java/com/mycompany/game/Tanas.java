@@ -4,65 +4,61 @@ package com.mycompany.game;
 import java.util.Random;
  
 class Tanas implements CharacterStats {  // Basta 6
- 
     private int hp;
     private int energy;
+//actions
     private int whip;
     private int bite;
-    private boolean[] evadeFlag = new boolean[]{false};
- 
-    // Constructor (if you want to allow dynamic initialization)
+    private boolean evadeFlag = false;
+//constructor
     public Tanas(int hp, int energy, int whip, int bite) {
         this.hp = hp;
         this.energy = energy;
         this.whip = whip;
         this.bite = bite;
     }
- 
-    // Getter methods
+//setter
     @Override
-    public int getHP() {
-        return hp;
-    }
- 
+    public int getHP() { return hp; }
     @Override
-    public int getEnergy() {
-        return energy;
-    }
- 
-    // Damage taking logic
+    public int getEnergy() { return energy; }
     @Override
     public void takeDamage(int amount) {
-        if (evadeFlag[0]) {
-            evadeFlag[0] = false;
+        if (evadeFlag) {
+            evadeFlag = false;
             System.out.println("Tanas dodged the attack with graceful flight! 0 damage.");
             return;
         }
         hp -= amount;
-        if (hp < 0) {
-            hp = 0;
-        }
+        if (hp < 0) { hp = 0; }
     }
- 
     @Override
     public void useEnergy(int amount) {
         energy -= amount;
         if (energy < 0) energy = 0;
     }
- 
-    // Method to gain energy
+    @Override
     public void gainEnergy(int amount) {
         energy += amount;
         if (energy > 5) {
             energy = 5;
         }
     }
- 
+    
+    @Override
+    public void setEvadeFlag(boolean value){ evadeFlag = value; }
+    @Override
+    public boolean getEvadeFlag(){ return evadeFlag; }
+    @Override
+    public void setDefendFlag(boolean value){}
+    @Override
+    public boolean getDefendFlag(){ return false; }
+    
     // ATTACK METHODS
     public void whip(CharacterStats target) {
         int energyCost = 1;
         Random random = new Random();  
-        int whipDMG = random.nextInt(3) + 6;
+        int whipDMG = random.nextInt(3) + whip;
         if (energy >= energyCost) {
             useEnergy(energyCost);
             System.out.println("Tanas uses Whip, doing "+whipDMG+" damage!");
@@ -75,7 +71,7 @@ class Tanas implements CharacterStats {  // Basta 6
     public void bite(CharacterStats target) {
         int energyCost = 2; 
         Random random = new Random();  
-        int biteDMG = random.nextInt(5) + 14;
+        int biteDMG = random.nextInt(5) + bite;
  
         if (energy >= energyCost) {
             useEnergy(energyCost);  
@@ -86,6 +82,6 @@ class Tanas implements CharacterStats {  // Basta 6
         }
     }
     public void evade(){
-        Skill.evade(this, evadeFlag, 1);
+        Skill.evade(this, 1);
     }
 }
