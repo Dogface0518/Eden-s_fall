@@ -1,6 +1,19 @@
 //----MAIN.JAVA----
 package com.mycompany.game;
 
+import javax.swing.SwingUtilities;
+
+public class Main {
+    public static void main(String[] args) {
+        // Launch the GUI
+        SwingUtilities.invokeLater(() -> {
+            new GAMEGUI().setVisible(true);
+        });
+    }
+}
+
+/* package com.mycompany.game;
+
 import java.util.Scanner;
 import java.util.Random;
  
@@ -59,11 +72,11 @@ public class Main {
         while (true) {
             System.out.println();
             System.out.println(playerName + ", choose your character:");
-            System.out.println("1. Eb   - The Reckless Striker  ||HP:60 SK1: 7 SK2:15");
-            System.out.println("2. Adan - The Iron Resolve      ||HP:80 SK1: 5 SK2: 8");
-            System.out.println("3. Tanas - The Devil            ||HP:66 SK1: 6 SK2:14");
-            System.out.println("4. Guide - The Guardian         ||HP:60 SK1: 9 SK2:25");
-            System.out.println("5. Apple - The Temptor          ||HP:50 SK1: 7 SK2:11");
+            System.out.println("1. Eb   - The Reckless Striker");
+            System.out.println("2. Adan - The Iron Resolve");
+            System.out.println("3. Tanas - The Devil");
+            System.out.println("4. Guide - The Guardian");
+            System.out.println("5. Apple - The Temptor");
             String choice = scanner.nextLine();
             System.out.println();
             if (choice.equals("1")) {
@@ -81,7 +94,7 @@ public class Main {
             } else if (choice.equals("4")) {
                 System.out.println("-----Lore bits-----");
                 System.out.println("Angel, An Observer, It works in mysterious ways, Its motives unknown.");//
-                return new Guide(60, 4, 9, 25);//HP, ENERGY, BASIC ATTACK, SKILL
+                return new Guide(60, 4, 9, 5);//HP, ENERGY, BASIC ATTACK, SKILL
             } else if (choice.equals("5")) {
                 System.out.println("-----Lore bits-----");
                 System.out.println("Temptation, Your head starts aching as visions and knowledge incomprohensible floods into your mind. \"%%$ #@$!@ ^@$^#$ !$$@@ !$@!) ");//
@@ -89,33 +102,32 @@ public class Main {
             }
         }
     }
-    // 1 energy ang Skill 1, 2 Energy Skill 2(naay + 1 - 4 dmg compared sa 2 ka skill 1). Evade skillcost 1 or 2. 
     public static void playerTurn(Scanner scanner, CharacterStats player, CharacterStats opponent, String playerName) {
         Random random = new Random(); //for dice roll||damage range
         System.out.println(playerName + ", choose an action:");
         if (player instanceof Eb) {
-            System.out.println("1. Low Kick  - (1)  energy | (7) damage");
-            System.out.println("2. Drop Kick - (2)  energy | (15) damage");
+            int LKickDMG = random.nextInt(3) + 7;  System.out.println("1. Low Kick  - (1)  energy | (7) damage");
+            int dropKDMG = random.nextInt(5) + 15;  System.out.println("2. Drop Kick - (3)  energy | (15) damage");
             System.out.println("3. Evade     - (2)  energy");
             System.out.println("4. Skip      - (+1) energy ");
         } else if (player instanceof Adan) {
-            System.out.println("1. Punch Combo - (1)  energy | (5) damage");
-            System.out.println("2. Tackle      - (2)  energy | (8) damage");
+            int punchDMG  = random.nextInt(3) + 5;  System.out.println("1. Punch Combo - (1)  energy | (5) damage");
+            int tackleDMG = random.nextInt(4) + 8;  System.out.println("2. Tackle      - (2)  energy | (8) damage");
             System.out.println("3. Defend      - (2)  energy");
             System.out.println("4. Skip        - (+1) energy");
         } else if (player instanceof Tanas) {
-            System.out.println("1. Whip        - (1)  energy | (6) damage");
-            System.out.println("2. Bite        - (2)  energy | (14) damage");
+            int whipeDMG   = random.nextInt(3) + 6;  System.out.println("1. Whip        - (1)  energy | (6) damage");
+            int biteDamage = random.nextInt(5) + 14;  System.out.println("2. Bite        - (2)  energy | (14) damage");
             System.out.println("3. Evade       - (1)  energy");
             System.out.println("4. Skip        - (+1) energy");
         }  else if (player instanceof Guide) {
-            System.out.println("1. Bless       - (1)  energy | (9) damage");
-            System.out.println("2. Smite       - (2)  energy | (25) damage");
+            int blessDMG = random.nextInt(4) + 9;  System.out.println("1. Bless       - (1)  energy | (9) damage");
+            int smiteDMG = random.nextInt(3) + 5;  System.out.println("2. Smite       - (2)  energy | (5) damage");
             System.out.println("3. Defend      - (1)  energy");
             System.out.println("4. Skip        - (+1) energy");
         }  else if (player instanceof Apple) {
-            System.out.println("1. Bump         - (1)  energy | (7) damage");//
-            System.out.println("2. Squash       - (2)  energy | (11) damage");//
+            int bumpDMG   = random.nextInt(3) + 7;  System.out.println("1. Bump         - (1)  energy | (7) damage");//
+            int squashDMG = random.nextInt(4) + 11;  System.out.println("2. Squash       - (2)  energy | (11) damage");//
             System.out.println("3. Defend       - (2)  energy");//
             System.out.println("4. Skip         - (+1) energy");
         }
@@ -181,9 +193,10 @@ public class Main {
                     System.out.println(playerName + " chooses to skip the turn and gains 1 energy.");
                     applePlayer.gainEnergy(1);
                 }
-                default -> System.out.println("Invalid action. Turn skipped. +1 Energy.");
+                default -> System.out.println("Invalid action. Turn skipped.");
             }
             System.out.println("-O-------------O-");
         }
     }
 }
+*/
