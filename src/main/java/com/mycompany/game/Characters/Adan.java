@@ -1,5 +1,8 @@
 //----ADAN.JAVA----
-package com.mycompany.game;
+package com.mycompany.game.Characters;
+
+import com.mycompany.game.CharacterStats;
+import com.mycompany.game.Skill;
 
 public class Adan extends CharacterStats {
 

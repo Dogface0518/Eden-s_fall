@@ -1,5 +1,10 @@
 package com.mycompany.game;
 
+import com.mycompany.game.Characters.Guide;
+import com.mycompany.game.Characters.Eb;
+import com.mycompany.game.Characters.Apple;
+import com.mycompany.game.Characters.Tanas;
+import com.mycompany.game.Characters.Adan;
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.text.StyledDocument;
