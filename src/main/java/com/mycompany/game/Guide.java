@@ -1,5 +1,34 @@
-//----GUIDE.JAVA----
 package com.mycompany.game;
+
+public class Guide extends CharacterStats {
+
+    public Guide(int hp, int energy) {
+        super(hp, energy);
+    }
+
+    @Override
+    public String getName() {
+        return "Guide";
+    }
+
+    public String bless(CharacterStats target) {
+        int cost = 1;
+        if (getEnergy() < cost) return getName() + " tried to Bless but lacked energy!";
+        useEnergy(cost);
+        return Skill.handleIncomingDamage(target, 4, getName());
+    }
+
+    public String smite(CharacterStats target) {
+        int cost = 2;
+        if (getEnergy() < cost) return getName() + " tried to Smite but lacked energy!";
+        useEnergy(cost);
+        return Skill.handleIncomingDamage(target, 9, getName());
+    }
+}
+
+
+
+/*package com.mycompany.game;
  
 import java.util.Random;
 
@@ -83,4 +112,4 @@ class Guide implements CharacterStats {
     public void defend(){
         Skill.defend(this, 1);
     }
-}
+}*/

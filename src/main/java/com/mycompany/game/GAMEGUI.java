@@ -2,6 +2,9 @@ package com.mycompany.game;
 
 import javax.swing.*;
 import java.awt.*;
+import javax.swing.text.StyledDocument;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
 
 public class GAMEGUI extends JFrame {
 
@@ -48,11 +51,11 @@ public class GAMEGUI extends JFrame {
         inner.setBackground(Color.BLACK);
         inner.setLayout(new GridLayout(2, 1, 0, 20));
 
-        JLabel title = new JLabel("Eden's Fall");
+        JLabel title = new JLabel("Eden's Fall", SwingConstants.CENTER);
         title.setFont(new Font("Serif", Font.BOLD, 40));
         title.setForeground(Color.WHITE);
 
-        JLabel clickText = new JLabel("Click anywhere to start");
+        JLabel clickText = new JLabel("Click anywhere to start", SwingConstants.CENTER);
         clickText.setFont(new Font("Serif", Font.PLAIN, 20));
         clickText.setForeground(Color.GRAY);
 
@@ -69,44 +72,61 @@ public class GAMEGUI extends JFrame {
 
     // ===================== STORY SCREEN =====================
     private void showStoryScreen() {
-        JButton storyButton = new JButton();
-        storyButton.setBackground(Color.BLACK);
-        storyButton.setBorderPainted(false);
-        storyButton.setFocusPainted(false);
-        storyButton.setLayout(new GridBagLayout());
+        getContentPane().removeAll();
 
-        JPanel inner = new JPanel();
-        inner.setBackground(Color.BLACK);
-        inner.setLayout(new GridLayout(0, 1, 0, 20));
+        JPanel storyPanel = new JPanel(new BorderLayout());
+        storyPanel.setBackground(Color.BLACK);
 
-        String[] storyLines = {
-            "In a reimagined Eden, everything is peaceful and harmonious, but that balance is about to be shattered.",
-            "The Garden is not just a paradise - it is a place of ancient power, with forces beyond mortal comprehension keeping it in balance.",
-            "The conflict arises when the Garden itself begins to deteriorate, corrupted by forces both external and internal.",
-            "The players are drawn into this cosmic struggle, with each character representing different facets of this world's downfall or potential redemption.",
-            "The fighting isn't just a physical battle - it's a fight for the very soul of the Garden, each character believing they have the right to shape its future in their image.",
-            "What does Eden need: redemption, destruction, or a new beginning?"
-        };
+        String storyText =
+                "In a reimagined Eden, everything is peaceful and harmonious, but that balance is about to be shattered.\n\n" +
+                        "The Garden is not just a paradise – it is a place of ancient power, with forces beyond mortal comprehension keeping it in balance.\n\n" +
+                        "The conflict arises when the Garden itself begins to deteriorate, corrupted by forces both external and internal.\n\n" +
+                        "The players are drawn into this cosmic struggle, each representing a different facet of Eden’s downfall or possible redemption.\n\n" +
+                        "The fighting isn't just physical – it's a battle for the very soul of Eden.\n\n" +
+                        "What does the Garden need: redemption, destruction, or a new beginning?";
 
-        for (String line : storyLines) {
-            JLabel lbl = new JLabel(line);
-            lbl.setForeground(Color.WHITE);
-            lbl.setFont(new Font("Serif", Font.PLAIN, 18));
-            inner.add(lbl);
-        }
+        JTextPane textPane = new JTextPane();
+        textPane.setEditable(false);
+        textPane.setBackground(Color.BLACK);
+        textPane.setForeground(Color.WHITE);
+        textPane.setFont(new Font("Serif", Font.PLAIN, 22));
+        textPane.setMargin(new Insets(40, 60, 40, 60));
 
-        storyButton.add(inner);
-        setContentPane(storyButton);
+        StyledDocument doc = textPane.getStyledDocument();
+        SimpleAttributeSet center = new SimpleAttributeSet();
+        StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+        doc.setParagraphAttributes(0, doc.getLength(), center, false);
+
+        textPane.setText(storyText);
+
+        JScrollPane scrollPane = new JScrollPane(textPane);
+        scrollPane.setBorder(null);
+        scrollPane.getViewport().setBackground(Color.BLACK);
+
+        storyPanel.add(scrollPane, BorderLayout.CENTER);
+
+        JButton nextBtn = new JButton("Next");
+        nextBtn.setBackground(Color.DARK_GRAY);
+        nextBtn.setForeground(Color.WHITE);
+        nextBtn.setFocusPainted(false);
+        nextBtn.setFont(new Font("Serif", Font.BOLD, 16));
+
+        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        bottomPanel.setBackground(Color.BLACK);
+        bottomPanel.add(nextBtn);
+
+        nextBtn.addActionListener(e -> showPlayerSelection(1));
+
+        storyPanel.add(bottomPanel, BorderLayout.SOUTH);
+
+        setContentPane(storyPanel);
         revalidate();
         repaint();
-
-        storyButton.addActionListener(e -> showPlayerSelection(1));
     }
+
     // ===================== CHARACTER SELECTION =====================
     private void showPlayerSelection(int playerNumber) {
         getContentPane().removeAll();
-        revalidate();
-        repaint();
 
         JPanel selectPanel = new JPanel(new BorderLayout());
         selectPanel.setBackground(Color.BLACK);
@@ -120,7 +140,6 @@ public class GAMEGUI extends JFrame {
         JPanel list = new JPanel();
         list.setBackground(Color.BLACK);
         list.setLayout(new BoxLayout(list, BoxLayout.Y_AXIS));
-        list.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
 
         String[] chars = {"Eb", "Adan", "Tanas", "Guide", "Apple"};
         for (String c : chars) {
@@ -162,8 +181,6 @@ public class GAMEGUI extends JFrame {
     // ===================== FULLSCREEN LORE PANEL =====================
     private void showLorePanel(String character, int playerNumber) {
         getContentPane().removeAll();
-        revalidate();
-        repaint();
 
         JPanel lorePanel = new JPanel(new BorderLayout());
         lorePanel.setBackground(Color.BLACK);
@@ -222,71 +239,24 @@ public class GAMEGUI extends JFrame {
 
     private String getCharacterLore(String name) {
         return switch (name) {
-            case "Eb" ->
-                "Eb felt the shift like an insult hurled at her from the heavens.\n" +
-"For ages, she had lived with a story forced upon her — the temptress, the wrongdoer, the reason paradise had once fallen. Those whispers had clung to her like chains. But when the Mistake Pulse echoed through her bones, something changed.\n" +
-"\n" +
-"With the dishes washed and the roles she never chose finally cracking apart, she saw Eden falling and thought:\n" +
-"Not again. Not without my say this time.\n" +
-"\n" +
-"She stepped forward not to be forgiven, but to be feared.\n" +
-"If Eden was collapsing, she would rebuild it with her own hands — a Garden where no one could twist her story ever again.";
-            case "Adan" ->
-                "Adan awoke from the pulse with a hollow ache in his chest.\n" +
-"He was made to be a companion, yes — but also something else. Something unfinished. Born from the discarded flesh of creation, he’d always felt like a leftover shaped into a man.\n" +
-"\n" +
-"As Eden decayed, Adan feared he would decay with it.\n" +
-"If the Garden died, what was he?\n" +
-"A mistake’s mistake?\n" +
-"\n" +
-"No.\n" +
-"He refused to be an afterthought.\n" +
-"With Eden unraveling, Adan found a new purpose: to reshape the world and prove to creation itself that he deserved to stand on his own. Even if he had to fight everyone — Eb included — to claim that destiny.";
-            case "Tanas" ->
-                "Far from the others, Tanas watched the Garden’s collapse with something close to delight.\n" +
-"This was the moment he had waited for.\n" +
-"\n" +
-"Once a celestial servant, he had been cast out not for hatred, but for curiosity. He never wished for destruction for its own sake — only for change. For the freedom to choose. For the right to question a perfect world that smothered its inhabitants with its own flawlessness.\n" +
-"\n" +
-"Now Eden trembled, and Tanas saw an opportunity glowing at its core.\n" +
-"The Fall, he believed, was not a tragedy at all — but a necessary evolution. If it took chaos to free the Garden from stagnation, he would gladly pull every root from the soil.\n" +
-"\n" +
-"But even he feared a truth he’d never admit:\n" +
-"What if his freedom meant annihilation for everyone else?";
-            case "Guide" ->
-                "Guide alone understood the scale of the disaster.\n" +
-"A silent watcher woven from divine breath, it drifted above the fraying world, its form flickering with indecision. Eden had been its charge — not to shape, not to rule, but to observe. Always the observer. Never the actor.\n" +
-"\n" +
-"But now the balance that Guide was meant to preserve was collapsing.\n" +
-"Voices from above offered no answers.\n" +
-"Every outcome led to ruin or rebirth, and every choice demanded intervention.\n" +
-"\n" +
-"For the first time, the observer wondered:\n" +
-"Is neutrality just another form of abandonment?\n" +
-"\n" +
-"If Guide stepped into the conflict, it could save Eden… or destroy the very balance it was meant to protect.";
-            case "Apple" ->
-                "Deep in the heart of Eden, sealed away under roots older than the stars, something awakened.\n" +
-"The Apple — Temptation incarnate — blinked open its formless eyes, knowledge dripping off it like nectar.\n" +
-"\n" +
-"It remembered everything: the first bite, the first doubt, the first spark of curiosity that split innocence in two. Knowledge had always been a blessing and a curse, but most of all, it had been irresistible.\n" +
-"\n" +
-"As Eden rotted, Apple felt the seal around its mind break.\n" +
-"It rose into the world, flooding all who touched it with visions and truths no living being was meant to carry.\n" +
-"To Apple, ignorance was the true prison.\n" +
-"If Eden was dying, then it would drag every secret into the light before the Garden fell into darkness.";
+            case "Eb" -> "Eb felt the shift like an insult hurled at her...";
+            case "Adan" -> "Adan awoke from the pulse with a hollow ache...";
+            case "Tanas" -> "Far from the others, Tanas watched the Garden’s collapse...";
+            case "Guide" -> "Guide alone understood the scale of the disaster...";
+            case "Apple" -> "Deep in the heart of Eden, sealed away under roots...";
             default -> "";
         };
     }
 
+    // ===================== CREATE CHARACTERS =====================
     private CharacterStats createCharacter(String name) {
         return switch (name) {
-            case "Eb" -> new Eb(60, 4, 7, 15);
-            case "Adan" -> new Adan(80, 4, 5, 8);
-            case "Tanas" -> new Tanas(66, 4, 6, 14);
-            case "Guide" -> new Guide(60, 4, 9, 5);
-            case "Apple" -> new Apple(50, 4, 7, 11);
-            default -> new Eb(60, 4, 7, 15);
+            case "Eb" -> new Eb(60, 4);
+            case "Adan" -> new Adan(80, 4);
+            case "Tanas" -> new Tanas(66, 4);
+            case "Guide" -> new Guide(60, 4);
+            case "Apple" -> new Apple(50, 4);
+            default -> new Eb(60, 4);
         };
     }
 
@@ -318,11 +288,11 @@ public class GAMEGUI extends JFrame {
 
         CharacterStats current = player1Turn ? player1 : player2;
         CharacterStats enemy = player1Turn ? player2 : player1;
-        String currentName = player1Turn ? "Player 1" : "Player 2";
 
-        log("\n" + currentName + "'s turn.");
+        log("\n" + current.getName() + "'s turn.");
 
-        String[] actions = {"Attack 1", "Attack 2", "Defend", "Skip"};
+        String[] actions = getActions(current);
+
         for (int i = 0; i < actions.length; i++) {
             int idx = i;
             JButton btn = new JButton(actions[i]);
@@ -330,7 +300,8 @@ public class GAMEGUI extends JFrame {
             btn.setForeground(Color.WHITE);
 
             btn.addActionListener(e -> {
-                performAction(current, enemy, idx, currentName);
+                String actionLog = performAction(current, enemy, idx);
+                log(actionLog);
                 updateStatusLabels();
                 if (!checkEnd()) {
                     player1Turn = !player1Turn;
@@ -345,76 +316,113 @@ public class GAMEGUI extends JFrame {
         actionPanel.repaint();
     }
 
-    private void log(String text) {
-        System.out.println(text);
-        gameLog.append(text + "\n");
+    // ===================== ACTION LOGIC =====================
+    private String[] getActions(CharacterStats c) {
+        return switch (c.getClass().getSimpleName()) {
+            case "Adan" -> new String[]{"Punch", "Tackle", "Defend", "Skip"};
+            case "Apple" -> new String[]{"Bump", "Squash", "Evade", "Skip"};
+            case "Eb" -> new String[]{"Lowkick", "Dropkick", "Evade", "Skip"};
+            case "Guide" -> new String[]{"Bless", "Smite", "Defend", "Skip"};
+            case "Tanas" -> new String[]{"Whip", "Bite", "Evade", "Skip"};
+            default -> new String[]{"Attack1", "Attack2", "Skill", "Skip"};
+        };
     }
 
-    private void performAction(CharacterStats p, CharacterStats enemy, int action, String name) {
-        int attackCost = 1;
+    private String performAction(CharacterStats p, CharacterStats enemy, int action) {
+    String logMsg = "";
 
-        switch (p.getClass().getSimpleName()) {
-            case "Adan" -> {
-                Adan ad = (Adan) p;
-                if (action == 0) { if (p.getEnergy() >= attackCost) { ad.punch(enemy); p.useEnergy(attackCost); log(name + " used Punch!"); } else log(name + " tried Punch but not enough energy!"); }
-                else if (action == 1) { if (p.getEnergy() >= attackCost) { ad.tackle(enemy); p.useEnergy(attackCost); log(name + " used Tackle!"); } else log(name + " tried Tackle but not enough energy!"); }
-                else if (action == 2) { ad.defend(); log(name + " is Defending!"); }
-                else { p.gainEnergy(1); log(name + " skipped the turn and gained 1 Energy!"); }
+    switch (p.getClass().getSimpleName()) {
+
+        case "Adan" -> {
+            Adan a = (Adan) p;
+            if (action == 0) logMsg = a.punch(enemy);
+            else if (action == 1) logMsg = a.tackle(enemy);
+            else if (action == 2) logMsg = Skill.defend(a, 2, a.getName());
+            else { 
+                a.gainEnergy(1); 
+                logMsg = a.getName() + " skipped turn (+1 Energy)";
             }
-            case "Apple" -> {
-                Apple ap = (Apple) p;
-                if (action == 0) { if (p.getEnergy() >= attackCost) { ap.bump(enemy); p.useEnergy(attackCost); log(name + " used Bump!"); } else log(name + " tried Bump but not enough energy!"); }
-                else if (action == 1) { if (p.getEnergy() >= attackCost) { ap.squash(enemy); p.useEnergy(attackCost); log(name + " used Squash!"); } else log(name + " tried Squash but not enough energy!"); }
-                else if (action == 2) { ap.evade(); log(name + " is Evading!"); }
-                else { p.gainEnergy(1); log(name + " skipped the turn and gained 1 Energy!"); }
+        }
+
+        case "Apple" -> {
+            Apple a = (Apple) p;
+            if (action == 0) logMsg = a.bump(enemy);
+            else if (action == 1) logMsg = a.squash(enemy);
+            else if (action == 2) logMsg = Skill.evade(a, 2, a.getName());
+            else { 
+                a.gainEnergy(1); 
+                logMsg = a.getName() + " skipped turn (+1 Energy)";
             }
-            case "Eb" -> {
-                Eb eb = (Eb) p;
-                if (action == 0) { if (p.getEnergy() >= attackCost) { eb.lowkick(enemy); p.useEnergy(attackCost); log(name + " used Lowkick!"); } else log(name + " tried Lowkick but not enough energy!"); }
-                else if (action == 1) { if (p.getEnergy() >= attackCost) { eb.dropkick(enemy); p.useEnergy(attackCost); log(name + " used Dropkick!"); } else log(name + " tried Dropkick but not enough energy!"); }
-                else if (action == 2) { eb.evade(); log(name + " is Evading!"); }
-                else { p.gainEnergy(1); log(name + " skipped the turn and gained 1 Energy!"); }
+        }
+
+        case "Eb" -> {
+            Eb a = (Eb) p;
+            if (action == 0) logMsg = a.lowkick(enemy);
+            else if (action == 1) logMsg = a.dropkick(enemy);
+            else if (action == 2) logMsg = Skill.evade(a, 2, a.getName());
+            else { 
+                a.gainEnergy(1); 
+                logMsg = a.getName() + " skipped turn (+1 Energy)";
             }
-            case "Guide" -> {
-                Guide g = (Guide) p;
-                if (action == 0) { if (p.getEnergy() >= attackCost) { g.bless(enemy); p.useEnergy(attackCost); log(name + " used Bless!"); } else log(name + " tried Bless but not enough energy!"); }
-                else if (action == 1) { if (p.getEnergy() >= attackCost) { g.smite(enemy); p.useEnergy(attackCost); log(name + " used Smite!"); } else log(name + " tried Smite but not enough energy!"); }
-                else if (action == 2) { g.defend(); log(name + " is Defending!"); }
-                else { p.gainEnergy(1); log(name + " skipped the turn and gained 1 Energy!"); }
+        }
+
+        case "Guide" -> {
+            Guide a = (Guide) p;
+            if (action == 0) logMsg = a.bless(enemy);
+            else if (action == 1) logMsg = a.smite(enemy);
+            else if (action == 2) logMsg = Skill.defend(a, 1, a.getName());
+            else { 
+                a.gainEnergy(1); 
+                logMsg = a.getName() + " skipped turn (+1 Energy)";
             }
-            case "Tanas" -> {
-                Tanas t = (Tanas) p;
-                if (action == 0) { if (p.getEnergy() >= attackCost) { t.whip(enemy); p.useEnergy(attackCost); log(name + " used Whip!"); } else log(name + " tried Whip but not enough energy!"); }
-                else if (action == 1) { if (p.getEnergy() >= attackCost) { t.bite(enemy); p.useEnergy(attackCost); log(name + " used Bite!"); } else log(name + " tried Bite but not enough energy!"); }
-                else if (action == 2) { t.evade(); log(name + " is Evading!"); }
-                else { p.gainEnergy(1); log(name + " skipped the turn and gained 1 Energy!"); }
+        }
+
+        case "Tanas" -> {
+            Tanas a = (Tanas) p;
+            if (action == 0) logMsg = a.whip(enemy);
+            else if (action == 1) logMsg = a.bite(enemy);
+            else if (action == 2) logMsg = Skill.evade(a, 1, a.getName());
+            else { 
+                a.gainEnergy(1); 
+                logMsg = a.getName() + " skipped turn (+1 Energy)";
             }
         }
     }
 
+    return logMsg;
+}
+
+
+
+    // ===================== STATUS & END CHECK =====================
     private void updateStatusLabels() {
         if (player1 == null || player2 == null) return;
-        player1Status.setText("Player 1 - HP: " + player1.getHP() + ", Energy: " + player1.getEnergy());
-        player2Status.setText("Player 2 - HP: " + player2.getHP() + ", Energy: " + player2.getEnergy());
+        player1Status.setText(player1.getName() + " - HP: " + player1.getHP() + ", Energy: " + player1.getEnergy());
+        player2Status.setText(player2.getName() + " - HP: " + player2.getHP() + ", Energy: " + player2.getEnergy());
     }
 
     private boolean checkEnd() {
         if (player1.getHP() <= 0 && player2.getHP() <= 0) {
-            JOptionPane.showMessageDialog(this, "It's a tie!");
+            JOptionPane.showMessageDialog(this, "It's a Tie!");
             System.exit(0);
             return true;
         }
         if (player1.getHP() <= 0) {
-            JOptionPane.showMessageDialog(this, "Player 2 wins!");
+            JOptionPane.showMessageDialog(this, player2.getName() + " Wins!");
             System.exit(0);
             return true;
         }
         if (player2.getHP() <= 0) {
-            JOptionPane.showMessageDialog(this, "Player 1 wins!");
+            JOptionPane.showMessageDialog(this, player1.getName() + " Wins!");
             System.exit(0);
             return true;
         }
         return false;
+    }
+
+    private void log(String msg) {
+        gameLog.append(msg + "\n");
+        gameLog.setCaretPosition(gameLog.getDocument().getLength());
     }
 
     public static void main(String[] args) {

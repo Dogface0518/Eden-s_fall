@@ -1,6 +1,36 @@
 //----ADAN.JAVA----
 package com.mycompany.game;
 
+public class Adan extends CharacterStats {
+
+    public Adan(int hp, int energy) {
+        super(hp, energy);
+    }
+
+    @Override
+    public String getName() {
+        return "Adan";
+    }
+
+    public String punch(CharacterStats target) {
+        int cost = 1;
+        if (getEnergy() < cost) return getName() + " tried to Punch but lacked energy!";
+        useEnergy(cost);
+        return Skill.handleIncomingDamage(target, 5, getName());
+    }
+
+    public String tackle(CharacterStats target) {
+        int cost = 2;
+        if (getEnergy() < cost) return getName() + " tried to Tackle but lacked energy!";
+        useEnergy(cost);
+        return Skill.handleIncomingDamage(target, 10, getName());
+    }
+}
+
+
+
+/*package com.mycompany.game;
+
 import java.util.Random;
  
 class Adan implements CharacterStats {
@@ -81,4 +111,4 @@ class Adan implements CharacterStats {
     public void defend(){
         Skill.defend(this, 2);
     }
-}
+}*/

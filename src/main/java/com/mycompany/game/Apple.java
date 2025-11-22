@@ -1,5 +1,34 @@
 //----APPLE.JAVA----
 package com.mycompany.game;
+
+public class Apple extends CharacterStats {
+
+    public Apple(int hp, int energy) {
+        super(hp, energy);
+    }
+
+    @Override
+    public String getName() {
+        return "Apple";
+    }
+
+    public String bump(CharacterStats target) {
+        int cost = 1;
+        if (getEnergy() < cost) return getName() + " tried to Bump but lacked energy!";
+        useEnergy(cost);
+        return Skill.handleIncomingDamage(target, 4, getName());
+    }
+
+    public String squash(CharacterStats target) {
+        int cost = 2;
+        if (getEnergy() < cost) return getName() + " tried to Squash but lacked energy!";
+        useEnergy(cost);
+        return Skill.handleIncomingDamage(target, 8, getName());
+    }
+}
+
+
+/*package com.mycompany.game;
  
 import java.util.Random;
  
@@ -83,4 +112,4 @@ class Apple implements CharacterStats {
     public void evade(){
         Skill.evade(this, 2);
     }
-}
+}*/

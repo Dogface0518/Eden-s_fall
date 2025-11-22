@@ -1,6 +1,36 @@
 //----TANAS.JAVA----
 package com.mycompany.game;
 
+public class Tanas extends CharacterStats {
+
+    public Tanas(int hp, int energy) {
+        super(hp, energy);
+    }
+
+    @Override
+    public String getName() {
+        return "Tanas";
+    }
+
+    public String whip(CharacterStats target) {
+        int cost = 1;
+        if (getEnergy() < cost) return getName() + " tried to Whip but lacked energy!";
+        useEnergy(cost);
+        return Skill.handleIncomingDamage(target, 5, getName());
+    }
+
+    public String bite(CharacterStats target) {
+        int cost = 2;
+        if (getEnergy() < cost) return getName() + " tried to Bite but lacked energy!";
+        useEnergy(cost);
+        return Skill.handleIncomingDamage(target, 10, getName());
+    }
+}
+
+
+
+/*package com.mycompany.game;
+
 import java.util.Random;
  
 class Tanas implements CharacterStats {  // Basta 6
@@ -84,4 +114,4 @@ class Tanas implements CharacterStats {  // Basta 6
     public void evade(){
         Skill.evade(this, 1);
     }
-}
+}*/

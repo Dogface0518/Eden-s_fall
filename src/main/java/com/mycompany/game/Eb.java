@@ -1,5 +1,34 @@
-//----EB.JAVA----
 package com.mycompany.game;
+
+public class Eb extends CharacterStats {
+
+    public Eb(int hp, int energy) {
+        super(hp, energy);
+    }
+
+    @Override
+    public String getName() {
+        return "Eb";
+    }
+
+    public String lowkick(CharacterStats target) {
+        int cost = 1;
+        if (getEnergy() < cost) return getName() + " tried Lowkick but lacked energy!";
+        useEnergy(cost);
+        return Skill.handleIncomingDamage(target, 6, getName());
+    }
+
+    public String dropkick(CharacterStats target) {
+        int cost = 2;
+        if (getEnergy() < cost) return getName() + " tried Dropkick but lacked energy!";
+        useEnergy(cost);
+        return Skill.handleIncomingDamage(target, 12, getName());
+    }
+}
+
+
+
+/*package com.mycompany.game;
 
 import java.util.Random;
  
@@ -84,4 +113,4 @@ class Eb implements CharacterStats {
     public void evade(){
         Skill.evade(this, 2);
     }
-}
+}*/
