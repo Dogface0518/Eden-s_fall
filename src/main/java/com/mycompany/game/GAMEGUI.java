@@ -244,11 +244,59 @@ public class GAMEGUI extends JFrame {
 
     private String getCharacterLore(String name) {
         return switch (name) {
-            case "Eb" -> "Eb felt the shift like an insult hurled at her...";
-            case "Adan" -> "Adan awoke from the pulse with a hollow ache...";
-            case "Tanas" -> "Far from the others, Tanas watched the Garden’s collapse...";
-            case "Guide" -> "Guide alone understood the scale of the disaster...";
-            case "Apple" -> "Deep in the heart of Eden, sealed away under roots...";
+            case "Eb" ->
+                "Eb felt the shift like an insult hurled at her from the heavens.\n" +
+"For ages, she had lived with a story forced upon her — the temptress, the wrongdoer, the reason paradise had once fallen. Those whispers had clung to her like chains. But when the Mistake Pulse echoed through her bones, something changed.\n" +
+"\n" +
+"With the dishes washed and the roles she never chose finally cracking apart, she saw Eden falling and thought:\n" +
+"Not again. Not without my say this time.\n" +
+"\n" +
+"She stepped forward not to be forgiven, but to be feared.\n" +
+"If Eden was collapsing, she would rebuild it with her own hands — a Garden where no one could twist her story ever again.";
+            case "Adan" ->
+                "Adan awoke from the pulse with a hollow ache in his chest.\n" +
+"He was made to be a companion, yes — but also something else. Something unfinished. Born from the discarded flesh of creation, he’d always felt like a leftover shaped into a man.\n" +
+"\n" +
+"As Eden decayed, Adan feared he would decay with it.\n" +
+"If the Garden died, what was he?\n" +
+"A mistake’s mistake?\n" +
+"\n" +
+"No.\n" +
+"He refused to be an afterthought.\n" +
+"With Eden unraveling, Adan found a new purpose: to reshape the world and prove to creation itself that he deserved to stand on his own. Even if he had to fight everyone — Eb included — to claim that destiny.";
+            case "Tanas" ->
+                "Far from the others, Tanas watched the Garden’s collapse with something close to delight.\n" +
+"This was the moment he had waited for.\n" +
+"\n" +
+"Once a celestial servant, he had been cast out not for hatred, but for curiosity. He never wished for destruction for its own sake — only for change. For the freedom to choose. For the right to question a perfect world that smothered its inhabitants with its own flawlessness.\n" +
+"\n" +
+"Now Eden trembled, and Tanas saw an opportunity glowing at its core.\n" +
+"The Fall, he believed, was not a tragedy at all — but a necessary evolution. If it took chaos to free the Garden from stagnation, he would gladly pull every root from the soil.\n" +
+"\n" +
+"But even he feared a truth he’d never admit:\n" +
+"What if his freedom meant annihilation for everyone else?";
+            case "Guide" ->
+                "Guide alone understood the scale of the disaster.\n" +
+"A silent watcher woven from divine breath, it drifted above the fraying world, its form flickering with indecision. Eden had been its charge — not to shape, not to rule, but to observe. Always the observer. Never the actor.\n" +
+"\n" +
+"But now the balance that Guide was meant to preserve was collapsing.\n" +
+"Voices from above offered no answers.\n" +
+"Every outcome led to ruin or rebirth, and every choice demanded intervention.\n" +
+"\n" +
+"For the first time, the observer wondered:\n" +
+"Is neutrality just another form of abandonment?\n" +
+"\n" +
+"If Guide stepped into the conflict, it could save Eden… or destroy the very balance it was meant to protect.";
+            case "Apple" ->
+                "Deep in the heart of Eden, sealed away under roots older than the stars, something awakened.\n" +
+"The Apple — Temptation incarnate — blinked open its formless eyes, knowledge dripping off it like nectar.\n" +
+"\n" +
+"It remembered everything: the first bite, the first doubt, the first spark of curiosity that split innocence in two. Knowledge had always been a blessing and a curse, but most of all, it had been irresistible.\n" +
+"\n" +
+"As Eden rotted, Apple felt the seal around its mind break.\n" +
+"It rose into the world, flooding all who touched it with visions and truths no living being was meant to carry.\n" +
+"To Apple, ignorance was the true prison.\n" +
+"If Eden was dying, then it would drag every secret into the light before the Garden fell into darkness.";
             default -> "";
         };
     }
@@ -434,3 +482,4 @@ public class GAMEGUI extends JFrame {
         SwingUtilities.invokeLater(() -> new GAMEGUI().setVisible(true));
     }
 }
+
