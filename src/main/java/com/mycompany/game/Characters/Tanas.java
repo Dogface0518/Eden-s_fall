@@ -6,8 +6,8 @@ import com.mycompany.game.Skill;
 
 public class Tanas extends CharacterStats {
 
-    public Tanas(int hp, int energy) {
-        super(hp, energy);
+    public Tanas() {
+        super(66, 4);// Change HP and Energy values here
     }
 
     @Override

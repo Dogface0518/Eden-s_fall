@@ -6,8 +6,8 @@ import com.mycompany.game.Skill;
 
 public class Apple extends CharacterStats {
 
-    public Apple(int hp, int energy) {
-        super(hp, energy);
+    public Apple() {
+        super(50, 4);// Change HP and Energy values here
     }
 
     @Override

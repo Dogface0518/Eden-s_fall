@@ -6,8 +6,8 @@ import com.mycompany.game.Skill;
 
 public class Adan extends CharacterStats {
 
-    public Adan(int hp, int energy) {
-        super(hp, energy);
+    public Adan() {
+        super(80, 4);// Change HP and Energy values here
     }
 
     @Override

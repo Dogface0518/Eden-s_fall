@@ -1,3 +1,4 @@
+//----GAMEGUI.JAVA----
 package com.mycompany.game;
 
 import com.mycompany.game.Characters.Guide;
@@ -304,12 +305,12 @@ public class GAMEGUI extends JFrame {
     // ===================== CREATE CHARACTERS =====================
     private CharacterStats createCharacter(String name) {
         return switch (name) {
-            case "Eb" -> new Eb(60, 4);
-            case "Adan" -> new Adan(80, 4);
-            case "Tanas" -> new Tanas(66, 4);
-            case "Guide" -> new Guide(60, 4);
-            case "Apple" -> new Apple(50, 4);
-            default -> new Eb(60, 4);
+            case "Eb" -> new Eb();
+            case "Adan" -> new Adan();
+            case "Tanas" -> new Tanas();
+            case "Guide" -> new Guide();
+            case "Apple" -> new Apple();
+            default -> new Eb();
         };
     }
 

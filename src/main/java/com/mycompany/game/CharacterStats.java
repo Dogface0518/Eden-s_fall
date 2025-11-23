@@ -1,3 +1,4 @@
+//----CHARACTER STATS.JAVA----
 package com.mycompany.game;
 
 public abstract class CharacterStats {

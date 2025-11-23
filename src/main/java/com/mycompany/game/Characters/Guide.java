@@ -5,8 +5,8 @@ import com.mycompany.game.Skill;
 
 public class Guide extends CharacterStats {
 
-    public Guide(int hp, int energy) {
-        super(hp, energy);
+    public Guide() {
+        super(60, 4);// Change HP and Energy values here
     }
 
     @Override
