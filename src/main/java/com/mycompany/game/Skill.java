@@ -33,14 +33,12 @@ public class Skill {
             target.setEvadeFlag(false);
             return attackerName + " attacked " + targetName + " but it evaded! (0 dmg)";
         }
-
         if (target.getDefendFlag()) {
             target.setDefendFlag(false);
-            // We'll make defend fully block the incoming attack (as per earlier convo). If you'd prefer half, change below:
-            return attackerName + " attacked " + targetName + " but it blocked the attack! (0 dmg)";
+            int dmgDef = dmg/2;
+            target.takeDamage(dmgDef);
+            return attackerName + " attacked " + targetName + " but it blocked the attack! " + dmg/2;
         }
-
-        // No evade/defend -> apply damage
         target.takeDamage(dmg);
         return attackerName + " dealt " + dmg + " damage to " + targetName + "!";
     }
