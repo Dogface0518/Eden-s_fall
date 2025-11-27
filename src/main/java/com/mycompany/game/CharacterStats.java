@@ -10,7 +10,7 @@ public abstract class CharacterStats {
 
     public CharacterStats(int hp, int energy) {
         this.hp = hp;
-        this.energy = Math.min(energy, 5); // cap energy
+        this.energy = Math.min(energy, 4); // cap energy
         this.evadeFlag = false;
         this.defendFlag = false;
     }
@@ -30,7 +30,7 @@ public abstract class CharacterStats {
     }
     public void gainEnergy(int amount) {
         energy += amount;
-        if (energy > 5) energy = 5; // max energy cap
+        if (energy > 4) energy = 4; // max energy cap
     }
 
     // Flags

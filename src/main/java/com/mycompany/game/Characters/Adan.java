@@ -26,7 +26,7 @@ public class Adan extends CharacterStats {
         int cost = 2;
         if (getEnergy() < cost) return getName() + " tried to Tackle but lacked energy!";
         useEnergy(cost);
-        return Skill.handleIncomingDamage(target, 10, getName());
+        return Skill.handleIncomingDamage(target, 14, getName());
     }
 }
 

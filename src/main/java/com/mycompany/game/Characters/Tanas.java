@@ -19,14 +19,14 @@ public class Tanas extends CharacterStats {
         int cost = 1;
         if (getEnergy() < cost) return getName() + " tried to Whip but lacked energy!";
         useEnergy(cost);
-        return Skill.handleIncomingDamage(target, 5, getName());
+        return Skill.handleIncomingDamage(target, 6, getName());
     }
 
     public String bite(CharacterStats target) {
         int cost = 2;
         if (getEnergy() < cost) return getName() + " tried to Bite but lacked energy!";
         useEnergy(cost);
-        return Skill.handleIncomingDamage(target, 10, getName());
+        return Skill.handleIncomingDamage(target, 13, getName());
     }
 }
 

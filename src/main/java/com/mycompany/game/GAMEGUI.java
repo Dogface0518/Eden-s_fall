@@ -483,4 +483,3 @@ public class GAMEGUI extends JFrame {
         SwingUtilities.invokeLater(() -> new GAMEGUI().setVisible(true));
     }
 }
-

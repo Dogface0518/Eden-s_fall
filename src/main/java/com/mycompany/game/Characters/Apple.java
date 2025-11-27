@@ -19,14 +19,14 @@ public class Apple extends CharacterStats {
         int cost = 1;
         if (getEnergy() < cost) return getName() + " tried to Bump but lacked energy!";
         useEnergy(cost);
-        return Skill.handleIncomingDamage(target, 4, getName());
+        return Skill.handleIncomingDamage(target, 7, getName());
     }
 
     public String squash(CharacterStats target) {
         int cost = 2;
         if (getEnergy() < cost) return getName() + " tried to Squash but lacked energy!";
         useEnergy(cost);
-        return Skill.handleIncomingDamage(target, 8, getName());
+        return Skill.handleIncomingDamage(target, 14, getName());
     }
 }
 

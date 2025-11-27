@@ -1,3 +1,5 @@
+//----GUIDE.JAVA----
+
 package com.mycompany.game.Characters;
 
 import com.mycompany.game.CharacterStats;
@@ -18,14 +20,14 @@ public class Guide extends CharacterStats {
         int cost = 1;
         if (getEnergy() < cost) return getName() + " tried to Bless but lacked energy!";
         useEnergy(cost);
-        return Skill.handleIncomingDamage(target, 4, getName());
+        return Skill.handleIncomingDamage(target, 7, getName());
     }
 
     public String smite(CharacterStats target) {
         int cost = 2;
         if (getEnergy() < cost) return getName() + " tried to Smite but lacked energy!";
         useEnergy(cost);
-        return Skill.handleIncomingDamage(target, 9, getName());
+        return Skill.handleIncomingDamage(target, 13, getName());
     }
 }
 

@@ -1,3 +1,5 @@
+//----EB.JAVA----
+
 package com.mycompany.game.Characters;
 
 import com.mycompany.game.CharacterStats;
@@ -18,14 +20,14 @@ public class Eb extends CharacterStats {
         int cost = 1;
         if (getEnergy() < cost) return getName() + " tried Lowkick but lacked energy!";
         useEnergy(cost);
-        return Skill.handleIncomingDamage(target, 6, getName());
+        return Skill.handleIncomingDamage(target, 5, getName());
     }
 
     public String dropkick(CharacterStats target) {
         int cost = 2;
         if (getEnergy() < cost) return getName() + " tried Dropkick but lacked energy!";
         useEnergy(cost);
-        return Skill.handleIncomingDamage(target, 12, getName());
+        return Skill.handleIncomingDamage(target, 13, getName());
     }
 }
 
